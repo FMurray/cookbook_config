@@ -1,0 +1,31 @@
+version: 1.0
+
+data_sources:
+  - name: financial_reports
+    type: volume
+    path: /Volumes/main/raw_data/financial_reports
+    format: pdf
+    catalog: main_catalog
+    schema: raw_data
+    # table: financial_reports
+
+processing_steps:
+  - name: extract_text
+    function: extract_text_from_pdf
+    inputs:
+      - raw_data.financial_reports
+    output_table: processed_data.extracted_texts
+
+  - name: add_metadata
+    function: add_company_metadata
+    inputs:
+      - processed_data.extracted_texts
+    output_table: processed_data.enriched_texts
+
+vector_index:
+  name: financial_reports_index
+  inputs: enriched_texts
+  embedding_model: openai-embedding-model
+  catalog: main_catalog
+  schema: sec_rag
+  table: financial_reports_index
