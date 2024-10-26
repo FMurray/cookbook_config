@@ -11,13 +11,13 @@ data_sources:
 
 processing_steps:
   - name: parsing
-    function: src.functions.parsing.extract_text_from_pdf  # Full module path to the function
+    function: ai_cookbook.functions.parsing.extract_text_from_pdf  # Full module path to the function
     inputs:
       - data_source: financial_reports
     output_table: processed_data.extracted_texts
 
   - name: add_metadata
-    function: src.functions.metadata.add_metadata  # Full module path to the function
+    function: ai_cookbook.functions.metadata.add_metadata  # Full module path to the function
     inputs:
       - step: parsing
       - data_source: financial_reports

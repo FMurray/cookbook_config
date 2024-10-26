@@ -3,13 +3,13 @@ import importlib
 from pydantic import ValidationError, BaseModel, field_validator, Field
 from typing import List, Union, Optional
 
-from src.logging.logger import log
-from src.pipeline.data_source import DataSource
+from ai_cookbook.logging.logger import log
+from ai_cookbook.pipeline.data_source import DataSource
 
 
 class ProcessingStep(BaseModel):
     name: str
-    function: str  # This will be a module path like "src.functions.parsing.parse_pdf"
+    function: str  # This will be a module path like "ai_cookbook.functions.parsing.parse_pdf"
     inputs: List[Union["ProcessingStep", DataSource]]
     output_table: str
     parameters: Optional[dict] = Field(default_factory=dict)

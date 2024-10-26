@@ -56,8 +56,8 @@ def validate_processing_steps(steps):
         # Validate function existence
         if "function" in step:
             function_name = step["function"]
-            # Assume functions are available in src.functions
-            from src.functions import __dict__ as functions_dict
+            # Assume functions are available in ai_cookbook.functions
+            from ai_cookbook.functions import __dict__ as functions_dict
 
             if function_name not in functions_dict:
                 errors.append(

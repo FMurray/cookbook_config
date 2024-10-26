@@ -2,8 +2,6 @@ from pydantic import BaseModel, ValidationError, field_validator
 from typing import Optional
 import re
 
-from src.logging.logger import log
-
 
 class DataSource(BaseModel):
     name: str

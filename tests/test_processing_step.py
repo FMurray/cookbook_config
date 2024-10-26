@@ -1,7 +1,7 @@
 import pytest
 
-from src.pipeline.processing_step import ProcessingStep
-from src.pipeline.data_source import DataSource
+from ai_cookbook.pipeline.processing_step import ProcessingStep
+from ai_cookbook.pipeline.data_source import DataSource
 
 source_1 = DataSource(
     name="source1",
@@ -15,14 +15,14 @@ source_1 = DataSource(
 
 step_1 = ProcessingStep(
     name="step1",
-    function="src.functions.parsing.extract_text_from_pdf",
+    function="ai_cookbook.functions.parsing.extract_text_from_pdf",
     inputs=[source_1],
     output_table="output_table1",
 )
 
 step_2 = ProcessingStep(
     name="step2",
-    function="src.functions.parsing.extract_text_from_pdf",
+    function="ai_cookbook.functions.parsing.extract_text_from_pdf",
     inputs=[step_1],
     output_table="output_table2",
 )

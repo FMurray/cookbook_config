@@ -1,9 +1,11 @@
+from ..config import LOGGING_CONFIG
 import logging
 import logging.config
 import sys
 import os
 
-logging.config.fileConfig("config/logging.conf")
+
+logging.config.fileConfig(LOGGING_CONFIG)
 
 log = logging.getLogger("root")
 

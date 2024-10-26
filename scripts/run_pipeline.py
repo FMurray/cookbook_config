@@ -1,8 +1,8 @@
-from src.logging.logger import log, handle_exception
+from ai_cookbook.logging.logger import log, handle_exception
 import sys
 
 import argparse
-from src.pipeline.pipeline import Pipeline
+from ai_cookbook.pipeline.pipeline import Pipeline
 import yaml
 
 

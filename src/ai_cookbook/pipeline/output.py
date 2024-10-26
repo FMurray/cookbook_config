@@ -1,8 +1,8 @@
 from pydantic import ValidationError, BaseModel, field_validator
 from typing import List
 
-from src.logging.logger import log
-from src.pipeline.processing_step import ProcessingStep
+from ai_cookbook.logging.logger import log
+from ai_cookbook.pipeline.processing_step import ProcessingStep
 
 
 class Output(BaseModel):

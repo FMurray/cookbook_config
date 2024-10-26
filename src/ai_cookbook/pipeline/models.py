@@ -3,9 +3,9 @@
 # import re
 # import importlib
 
-# from src.pipeline.data_source import DataSource
-# from src.pipeline.processing_step import ProcessingStep
-# from src.pipeline.output import Output
+# from ai_cookbook.pipeline.data_source import DataSource
+# from ai_cookbook.pipeline.processing_step import ProcessingStep
+# from ai_cookbook.pipeline.output import Output
 
 
 # class PipelineConfig(BaseModel):
