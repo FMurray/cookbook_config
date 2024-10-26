@@ -1,3 +1,6 @@
+from src.logging.logger import log, handle_exception
+import sys
+
 import argparse
 from src.pipeline.pipeline import Pipeline
 import yaml
@@ -12,15 +15,15 @@ def main(config_path):
     try:
         pipeline = Pipeline(config_data)
     except Exception as e:
-        print("Pipeline initialization failed:")
-        print(e)
+        log.exception("💔 Pipeline initialization failed:")
         return  # Exit or raise an exception
 
-    print("Pipeline initialized successfully. Executing pipeline...")
-    pipeline.execute()
+    log.info("🔨 Pipeline initialized successfully. Executing pipeline...")
+    pipeline.run()
 
 
 if __name__ == "__main__":
+    log.info("🍃 Starting pipeline execution...")
     parser = argparse.ArgumentParser(description="Run the GenAI data pipeline.")
     parser.add_argument(
         "--config",
@@ -30,4 +33,10 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(args.config)
+    sys.excepthook = handle_exception
+
+    try:
+        main(args.config)
+    except Exception as e:
+        log.error(e)
+        # raise

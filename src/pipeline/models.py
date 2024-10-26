@@ -1,62 +1,58 @@
-from pydantic import BaseModel, field_validator, Field
-from typing import List, Optional, Union
-import re
+# from pydantic import BaseModel, field_validator, Field
+# from typing import List, Optional, Union
+# import re
+# import importlib
+
+# from src.pipeline.data_source import DataSource
+# from src.pipeline.processing_step import ProcessingStep
+# from src.pipeline.output import Output
 
 
-class DataSourceConfig(BaseModel):
-    name: str
-    type: str
-    path: str
-    format: str
-    catalog: str
-    table_schema: str
-    table: str
+# class PipelineConfig(BaseModel):
+#     @field_validator("outputs")
+#     def validate_outputs(cls, v):
+#         # TODO: we may not need to define an outputs
+#         if len(v) == 0:
+#             raise ValueError("Need to define at least one output")
+#         return v
 
-    @field_validator("type")
-    def validate_type(cls, v):
-        if v not in {"volume", "database", "api"}:
-            raise ValueError(f"Invalid data source type: {v}")
-        return v
+#     def __init__(self, **data):
+#         # Convert DataSource objects to dictionaries
+#         if "data_sources" in data:
+#             data_sources = []
+#             for ds in data["data_sources"]:
+#                 if hasattr(ds, "config"):
+#                     ds_dict = ds.config.model_dump()
+#                 else:
+#                     ds_dict = ds
+#                 data_sources.append(ds_dict)
+#             data["data_sources"] = data_sources
 
-    @field_validator("table")
-    def validate_table_name(cls, v):
-        if not re.match(r"^\w+$", v):
-            raise ValueError(f"Invalid table name: {v}")
-        return v
+#         # Convert ProcessingStep objects to dictionaries
+#         if "processing_steps" in data:
+#             processing_steps = []
+#             for step in data["processing_steps"]:
+#                 if hasattr(step, "config"):
+#                     step_dict = step.config.model_dump()
+#                 else:
+#                     step_dict = step
+#                 step_dict["__pipeline_config__"] = self
+#                 processing_steps.append(step_dict)
+#             data["processing_steps"] = processing_steps
 
+#         # Convert Output objects to dictionaries
+#         if "outputs" in data:
+#             outputs = []
+#             for output in data["outputs"]:
+#                 if hasattr(output, "config"):
+#                     output_dict = output.config.model_dump()
+#                 else:
+#                     output_dict = output
+#                 outputs.append(output_dict)
+#             data["outputs"] = outputs
 
-class ProcessingStepConfig(BaseModel):
-    name: str
-    function: str
-    inputs: List[str]
-    output_table: str
-    parameters: Optional[dict] = Field(default_factory=dict)
-
-    @field_validator("function")
-    def validate_function_exists(cls, v):
-        # Assume functions are available in src.functions
-        from src.functions import __dict__ as functions_dict
-
-        if v not in functions_dict:
-            raise ValueError(f"Function '{v}' does not exist in src.functions")
-        return v
-
-
-class OutputConfig(BaseModel):
-    name: str
-    type: str
-    inputs: List[str]
-    embedding_model: str
-    output_table: str
-
-    @field_validator("type")
-    def validate_type(cls, v):
-        if v != "vector_index":
-            raise ValueError(f"Invalid output type: {v}")
-        return v
+#         super().__init__(**data)
 
 
-class PipelineConfig(BaseModel):
-    data_sources: List[DataSourceConfig]
-    processing_steps: List[ProcessingStepConfig]
-    outputs: List[OutputConfig]
+# # to support recursive validation
+# ProcessingStepConfig.model_rebuild()

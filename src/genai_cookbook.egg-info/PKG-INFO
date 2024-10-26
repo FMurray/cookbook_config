@@ -1,9 +1,0 @@
-Metadata-Version: 2.1
-Name: genai_cookbook
-Version: 0.1.0
-Requires-Dist: databricks-sdk
-Requires-Dist: mlflow
-Requires-Dist: pydantic-settings
-Requires-Dist: pydantic
-Requires-Dist: pyyaml
-Requires-Dist: requests

@@ -5,27 +5,28 @@ data_sources:
     type: volume
     path: /Volumes/main/raw_data/financial_reports
     format: pdf
-    catalog: main_catalog
-    schema: raw_data
-    # table: financial_reports
+    catalog: main
+    schema: agent_app
+    volume_name: raw_data
 
 processing_steps:
-  - name: extract_text
-    function: extract_text_from_pdf
+  - name: parsing
+    function: src.functions.parsing.extract_text_from_pdf  # Full module path to the function
     inputs:
-      - raw_data.financial_reports
+      - data_source: financial_reports
     output_table: processed_data.extracted_texts
 
   - name: add_metadata
-    function: add_company_metadata
+    function: src.functions.metadata.add_metadata  # Full module path to the function
     inputs:
-      - processed_data.extracted_texts
+      - step: parsing
+      - data_source: financial_reports
     output_table: processed_data.enriched_texts
 
-vector_index:
-  name: financial_reports_index
-  inputs: enriched_texts
-  embedding_model: openai-embedding-model
-  catalog: main_catalog
-  schema: sec_rag
-  table: financial_reports_index
+outputs:
+  - name: financial_reports_index
+    type: vector_index
+    inputs: 
+      - enriched_texts
+    embedding_model: openai-embedding-model
+    output_table: main_catalog.sec_rag.financial_reports_index

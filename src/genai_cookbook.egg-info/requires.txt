@@ -1,6 +1,0 @@
-databricks-sdk
-mlflow
-pydantic-settings
-pydantic
-pyyaml
-requests

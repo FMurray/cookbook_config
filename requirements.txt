@@ -3,7 +3,9 @@ ipywidgets
 mlflow
 pydantic-settings
 pydantic
+pyspark
 pytest
 pyyaml
+rich
 typing-extensions
 
