@@ -2,7 +2,7 @@ import pathlib
 import anywidget
 import traitlets
 import yaml
-from typing import Dict, List
+from typing import Dict, List, TypedDict
 
 from pydantic_settings import BaseSettings
 from databricks.sdk import WorkspaceClient
@@ -16,9 +16,15 @@ class DatabricksSettings(BaseSettings):
 bundler_output_dir = pathlib.Path(__file__).parent / "static"
 
 
+class Edge(TypedDict):
+    source: str
+    target: str
+    id: str
+
+
 class ConfigWidget(anywidget.AnyWidget):
-    _esm = pathlib.Path(__file__) / "static/index.js"
-    _css = pathlib.Path(__file__).parent / "index.css"
+    _esm = pathlib.Path(__file__).parent / "static/app.js"
+    _css = pathlib.Path(__file__).parent / "static/app.css"
 
     settings = DatabricksSettings(
         databricks_host="https://e2-demo-field-eng.cloud.databricks.com"
@@ -38,11 +44,24 @@ class ConfigWidget(anywidget.AnyWidget):
     data_sources = traitlets.List([]).tag(sync=True)
     processing_steps = traitlets.List([]).tag(sync=True)
     outputs = traitlets.List([]).tag(sync=True)
-    edges = traitlets.List([]).tag(sync=True)
+    edges = traitlets.List(
+        traitlets.Dict(
+            per_key_traits={
+                "id": traitlets.Unicode(),
+                "source": traitlets.Unicode(),
+                "target": traitlets.Unicode(),
+            },
+        ).tag(sync=True),
+        default_value=[],
+    ).tag(sync=True)
 
-    def __init__(self, config_path: str, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, config_path: str, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.load_config(config_path)
+        self.observe(self.on_edges_change, names="edges")
+
+    def on_edges_change(self, change):
+        print(f"Edges changed: {change}")
 
     def load_config(self, config_path: str):
         """Load and parse the pipeline configuration file"""
@@ -65,18 +84,28 @@ class ConfigWidget(anywidget.AnyWidget):
             for output in pipeline.outputs
         ]
 
-        # Create edges list
+        # Create edges list with unique IDs
         edges = []
         # Add edges from data sources to processing steps
-        for step in pipeline.processing_steps:
+        for idx, step in enumerate(pipeline.processing_steps):
             for input_step in step.inputs:
-                edges.append({"source": input_step.name, "target": step.name})
+                edges.append(
+                    {
+                        "id": f"edge-{input_step.name}-{step.name}",
+                        "source": input_step.name,
+                        "target": step.name,
+                    }
+                )
 
         # Add edges from processing steps to outputs
-        for output in pipeline.outputs:
+        for idx, output in enumerate(pipeline.outputs):
             for input_step in output.inputs:
                 edges.append(
-                    {"source": input_step.name, "target": f"output_{output.name}"}
+                    {
+                        "id": f"edge-{input_step.name}-output_{output.name}",
+                        "source": input_step.name,
+                        "target": f"output_{output.name}",
+                    }
                 )
 
         self.edges = edges
