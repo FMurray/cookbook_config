@@ -13,8 +13,11 @@ class DatabricksSettings(BaseSettings):
     databricks_host: str
 
 
+bundler_output_dir = pathlib.Path(__file__).parent / "static"
+
+
 class ConfigWidget(anywidget.AnyWidget):
-    _esm = pathlib.Path(__file__).parent / "index.js"
+    _esm = pathlib.Path(__file__) / "static/index.js"
     _css = pathlib.Path(__file__).parent / "index.css"
 
     settings = DatabricksSettings(
