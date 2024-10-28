@@ -1,4 +1,5 @@
 from typing import List
+import yaml  # Add this import
 from pydantic import ValidationError, BaseModel
 
 from ai_cookbook.pipeline.data_source import DataSource
@@ -124,3 +125,53 @@ class Pipeline(BaseModel):
             # Log to MLflow
             self._log_to_mlflow()
         log.info("✅ YAY IT RAN")
+
+    @classmethod
+    def from_yaml(cls, yaml_path: str) -> "Pipeline":
+        """Create a Pipeline instance from a YAML file."""
+        try:
+            with open(yaml_path, "r") as f:
+                config = yaml.safe_load(f)
+
+            # Create a mapping of names to objects
+            name_to_obj = {}
+
+            # Create all data sources first
+            data_sources = []
+            for source_config in config.get("data_sources", []):
+                source = DataSource(**source_config)
+                name_to_obj[source.name] = source
+                data_sources.append(source)
+
+            # Create processing steps, resolving input references
+            processing_steps = []
+            for step_config in config.get("processing_steps", []):
+                input_names = step_config.pop("inputs", [])
+                # Resolve input references to actual objects
+                input_objects = [name_to_obj[name] for name in input_names]
+                step = ProcessingStep(**step_config, inputs=input_objects)
+                name_to_obj[step.name] = step
+                processing_steps.append(step)
+
+            # Create outputs, resolving input references
+            outputs = []
+            for output_config in config.get("outputs", []):
+                input_names = output_config.pop("inputs", [])
+                # Resolve input references to actual objects
+                input_objects = [name_to_obj[name] for name in input_names]
+                output = Output(**output_config, inputs=input_objects)
+                outputs.append(output)
+
+            return cls(
+                data_sources=data_sources,
+                processing_steps=processing_steps,
+                outputs=outputs,
+            )
+        except FileNotFoundError:
+            raise
+        except yaml.YAMLError as e:
+            raise
+        except KeyError as e:
+            raise ValueError(f"Referenced node not found: {e}")
+        except ValidationError as e:
+            raise

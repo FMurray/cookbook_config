@@ -1,0 +1,128 @@
+.counter-widget button { color: white; font-size: 1.75rem; background-color: #ea580c; padding: 0.5rem 1rem; border: none; border-radius: 0.25rem; }
+.counter-widget button:hover { background-color: #9a3412; }
+
+.config-widget {
+    padding: 20px;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+.config-widget canvas {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.config-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dag-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 20px 0;
+    min-height: 200px;
+    border: 3px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.dag-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.dag-node {
+    position: relative;
+    z-index: 2;
+    padding: 10px 20px;
+    border-radius: 6px;
+    background-color: white;
+    border: 2px solid #ccc;
+    text-align: center;
+    min-width: 150px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.node-type-source {
+    border-color: #4CAF50;
+}
+
+.node-type-step {
+    border-color: #2196F3;
+}
+
+.node-type-output {
+    border-color: #9C27B0;
+}
+
+.dag-node:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+line {
+    stroke: #666;
+    stroke-width: 2px;
+}
+
+.config-section {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+
+.config-section h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.config-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.config-section li {
+    padding: 5px 0;
+    color: #666;
+}
+
+.config-widget svg {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.config-widget text {
+    font-size: 12px;
+    pointer-events: none;
+}
+
+.config-widget line {
+    stroke-opacity: 0.6;
+}
+
+.config-widget circle {
+    stroke: white;
+    stroke-width: 1.5px;
+}
