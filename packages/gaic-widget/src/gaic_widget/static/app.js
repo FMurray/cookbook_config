@@ -33176,16 +33176,7 @@ function ConfigWidget() {
       strokeWidth: 2
     }
   }));
-  return /* @__PURE__ */ React.createElement("div", { style: {
-    position: "absolute",
-    // Position relative to Jupyter cell
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    width: "100%",
-    height: "100%"
-  } }, /* @__PURE__ */ React.createElement(
+  return /* @__PURE__ */ React.createElement("div", { style: { width: "100%", height: "600px" } }, /* @__PURE__ */ React.createElement(
     index,
     {
       nodes,
@@ -33234,10 +33225,6 @@ function useModelState(key) {
 }
 function createRender(Widget) {
   return ({ el, model, experimental }) => {
-    el.style.width = "100%";
-    el.style.height = "600px";
-    el.style.position = "relative";
-    el.style.display = "block";
     let root2 = ReactDOM.createRoot(el);
     root2.render(
       /* @__PURE__ */ React2.createElement(React2.StrictMode, null, /* @__PURE__ */ React2.createElement(RenderContext.Provider, { value: { model, experimental } }, /* @__PURE__ */ React2.createElement(Widget, null)))

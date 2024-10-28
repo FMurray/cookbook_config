@@ -38,11 +38,6 @@ export function useModelState(key) {
 export function createRender(Widget) {
     return ({ el, model, experimental }) => {
 
-      el.style.width = '100%';
-      el.style.height = '600px';
-      el.style.position = 'relative';  // Important for establishing stacking context
-      el.style.display = 'block';      // Ensures proper block formatting context
-
       let root = ReactDOM.createRoot(el);
       root.render(
           <React.StrictMode>
