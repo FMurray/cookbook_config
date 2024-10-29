@@ -3,11 +3,11 @@ version: 1.0
 data_sources:
   - name: financial_reports
     type: volume
-    path: /Volumes/main/raw_data/financial_reports
+    catalog: field_ai_examples
+    schema: alphaleger
+    volume_name: financebench
+    path: pdf
     format: pdf
-    catalog: main
-    schema: agent_app
-    volume_name: raw_data
 
 processing_steps:
   - name: parsing
@@ -16,17 +16,16 @@ processing_steps:
       - financial_reports
     output_table: processed_data.extracted_texts
 
-  - name: add_metadata
-    function: ai_cookbook.functions.metadata.add_metadata  # Full module path to the function
+  - name: chunking
+    function: ai_cookbook.functions.chunking.chunk_text  # Full module path to the function
     inputs:
       - parsing
-      - financial_reports
     output_table: processed_data.enriched_texts
 
 outputs:
   - name: financial_reports_index
     type: vector_index
     inputs: 
-      - add_metadata
+      - chunking
     embedding_model: openai-embedding-model
     output_table: main_catalog.sec_rag.financial_reports_index

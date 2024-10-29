@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import { ReactFlow, ReactFlowProvider, Controls, Background, Handle, addEdge, applyNodeChanges, applyEdgeChanges } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
 import ConfigWidget from "./Config";
+import ConfigWidgetWrapper from "./Config";
 
 let RenderContext = React.createContext(null);
 
@@ -50,4 +50,4 @@ export function createRender(Widget) {
     };
 }
 
-export default { render: createRender(ConfigWidget) };
+export default { render: createRender(ConfigWidgetWrapper) };

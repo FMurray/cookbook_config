@@ -26,68 +26,103 @@ class ConfigWidget(anywidget.AnyWidget):
     _esm = pathlib.Path(__file__).parent / "static/app.js"
     _css = pathlib.Path(__file__).parent / "static/app.css"
 
-    settings = DatabricksSettings(
-        databricks_host="https://e2-demo-field-eng.cloud.databricks.com"
-    )
-    workspace = WorkspaceClient(host=settings.databricks_host, profile="field-eng")
-    current_user = workspace.current_user.me()
-
-    # New traits for configuration data
-    display_name = traitlets.Unicode(
-        f"GAIC Config Widget - {current_user.display_name}"
-    ).tag(sync=True)
+    # Simple list traits
     catalogs = traitlets.List([]).tag(sync=True)
     schemas = traitlets.List([]).tag(sync=True)
     tables = traitlets.List([]).tag(sync=True)
 
-    # Add new traits for pipeline components
-    data_sources = traitlets.List([]).tag(sync=True)
-    processing_steps = traitlets.List([]).tag(sync=True)
-    outputs = traitlets.List([]).tag(sync=True)
-    edges = traitlets.List(
-        traitlets.Dict(
-            per_key_traits={
-                "id": traitlets.Unicode(),
-                "source": traitlets.Unicode(),
-                "target": traitlets.Unicode(),
-            },
-        ).tag(sync=True),
-        default_value=[],
+    # Pipeline component traits
+    data_sources = traitlets.List(
+        traitlets.Dict().tag(sync=True), default_value=[]
     ).tag(sync=True)
+    processing_steps = traitlets.List(
+        traitlets.Dict().tag(sync=True), default_value=[]
+    ).tag(sync=True)
+    outputs = traitlets.List(traitlets.Dict().tag(sync=True), default_value=[]).tag(
+        sync=True
+    )
+    edges = traitlets.List(traitlets.Dict().tag(sync=True), default_value=[]).tag(
+        sync=True
+    )
 
     def __init__(self, config_path: str, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.load_config(config_path)
+
+        self.settings = DatabricksSettings(
+            databricks_host="https://e2-demo-field-eng.cloud.databricks.com"
+        )
+        self.client = WorkspaceClient(
+            host=self.settings.databricks_host, profile="field-eng"
+        )
+        self.current_user = self.client.current_user.me()
+
+        # Base configuration traits
+        self.display_name = traitlets.Unicode(
+            f"GAIC Config Widget - {self.current_user.display_name}"
+        ).tag(sync=True)
+
+        self.pipeline = Pipeline.from_yaml(config_path)
+
+        self.populate_data(self.client)
         self.observe(self.on_edges_change, names="edges")
 
     def on_edges_change(self, change):
         print(f"Edges changed: {change}")
 
-    def load_config(self, config_path: str):
-        """Load and parse the pipeline configuration file"""
-        # Create Pipeline instance
-        pipeline = Pipeline.from_yaml(config_path)
+    def populate_data(self, client: WorkspaceClient):
+        """Populate the widget with the pipeline configuration"""
 
-        # Extract pipeline components
+        for ds in self.pipeline.data_sources:
+            ds.fetch_details(client)
+
+        # Extract pipeline components with dynamic attributes
         self.data_sources = [
-            {"id": ds.name, "type": "source", "label": ds.name}
-            for ds in pipeline.data_sources
+            {
+                "id": ds.name,
+                "type": "source",
+                "label": ds.name,
+                **{
+                    k: str(v)
+                    for k, v in ds.model_dump().items()
+                    if k not in ["name", "type"]
+                },
+            }
+            for ds in self.pipeline.data_sources
         ]
 
         self.processing_steps = [
-            {"id": step.name, "type": "step", "label": step.name}
-            for step in pipeline.processing_steps
+            {
+                "id": step.name,
+                "type": "step",
+                "label": step.name,
+                "operation": step.operation if hasattr(step, "operation") else "",
+                "parameters": {
+                    k: str(v) if not isinstance(v, (dict, list)) else v
+                    for k, v in step.model_dump().items()
+                    if k not in ["name", "type", "inputs"]
+                },
+            }
+            for step in self.pipeline.processing_steps
         ]
 
         self.outputs = [
-            {"id": f"output_{output.name}", "type": "output", "label": output.name}
-            for output in pipeline.outputs
+            {
+                "id": f"output_{output.name}",
+                "type": "output",
+                "label": output.name,
+                **{
+                    k: str(v) if not isinstance(v, (dict, list)) else v
+                    for k, v in output.model_dump().items()
+                    if k not in ["name", "type", "inputs"]
+                },
+            }
+            for output in self.pipeline.outputs
         ]
 
         # Create edges list with unique IDs
         edges = []
         # Add edges from data sources to processing steps
-        for idx, step in enumerate(pipeline.processing_steps):
+        for step in self.pipeline.processing_steps:
             for input_step in step.inputs:
                 edges.append(
                     {
@@ -98,7 +133,7 @@ class ConfigWidget(anywidget.AnyWidget):
                 )
 
         # Add edges from processing steps to outputs
-        for idx, output in enumerate(pipeline.outputs):
+        for output in self.pipeline.outputs:
             for input_step in output.inputs:
                 edges.append(
                     {
@@ -110,34 +145,25 @@ class ConfigWidget(anywidget.AnyWidget):
 
         self.edges = edges
 
-        # Extract unique entities
+        # Extract unique entities from all components
         catalogs = set()
         schemas = set()
         tables = set()
 
-        # Process data sources
-        for source in self.data_sources:
-            if "catalog" in source:
-                catalogs.add(source["catalog"])
-            if "schema" in source:
-                schemas.add(source["schema"])
-
-        # Process processing steps
-        for step in self.processing_steps:
-            if "output_table" in step:
-                table_parts = step["output_table"].split(".")
-                if len(table_parts) == 2:
-                    schemas.add(table_parts[0])
-                    tables.add(table_parts[1])
-
-        # Process outputs
-        for output in self.outputs:
-            if "output_table" in output:
-                table_parts = output["output_table"].split(".")
-                if len(table_parts) == 3:
-                    catalogs.add(table_parts[0])
-                    schemas.add(table_parts[1])
-                    tables.add(table_parts[2])
+        # Process all components to extract catalog/schema/table info
+        for component in [*self.data_sources, *self.processing_steps, *self.outputs]:
+            # Look for catalog/schema/table in any field
+            for key, value in component.items():
+                if isinstance(value, str):
+                    if "." in value:
+                        parts = value.split(".")
+                        if len(parts) == 3:
+                            catalogs.add(parts[0])
+                            schemas.add(parts[1])
+                            tables.add(parts[2])
+                        elif len(parts) == 2:
+                            schemas.add(parts[0])
+                            tables.add(parts[1])
 
         # Update the traits
         self.catalogs = sorted(list(catalogs))

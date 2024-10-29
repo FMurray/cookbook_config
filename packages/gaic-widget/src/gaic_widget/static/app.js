@@ -509,7 +509,7 @@ var require_react_development = __commonJS({
           }
           return element;
         };
-        function createElement3(type, config, children2) {
+        function createElement7(type, config, children2) {
           var propName;
           var props = {};
           var key = null;
@@ -1111,7 +1111,7 @@ var require_react_development = __commonJS({
           var dispatcher = resolveDispatcher();
           return dispatcher.useCallback(callback, deps);
         }
-        function useMemo2(create2, deps) {
+        function useMemo3(create2, deps) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useMemo(create2, deps);
         }
@@ -1608,7 +1608,7 @@ var require_react_development = __commonJS({
               error("React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s", typeString, info);
             }
           }
-          var element = createElement3.apply(this, arguments);
+          var element = createElement7.apply(this, arguments);
           if (element == null) {
             return element;
           }
@@ -1883,7 +1883,7 @@ var require_react_development = __commonJS({
         exports.useImperativeHandle = useImperativeHandle;
         exports.useInsertionEffect = useInsertionEffect;
         exports.useLayoutEffect = useLayoutEffect2;
-        exports.useMemo = useMemo2;
+        exports.useMemo = useMemo3;
         exports.useReducer = useReducer;
         exports.useRef = useRef2;
         exports.useState = useState4;
@@ -2382,9 +2382,9 @@ var require_react_dom_development = __commonJS({
         if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
           __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
         }
-        var React3 = require_react();
+        var React7 = require_react();
         var Scheduler = require_scheduler();
-        var ReactSharedInternals = React3.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+        var ReactSharedInternals = React7.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
         var suppressWarning = false;
         function setSuppressWarning(newSuppressWarning) {
           {
@@ -2433,7 +2433,7 @@ var require_react_dom_development = __commonJS({
         var HostPortal = 4;
         var HostComponent = 5;
         var HostText = 6;
-        var Fragment2 = 7;
+        var Fragment3 = 7;
         var Mode = 8;
         var ContextConsumer = 9;
         var ContextProvider = 10;
@@ -3590,7 +3590,7 @@ var require_react_dom_development = __commonJS({
               return "DehydratedFragment";
             case ForwardRef:
               return getWrappedName$1(type, type.render, "ForwardRef");
-            case Fragment2:
+            case Fragment3:
               return "Fragment";
             case HostComponent:
               return type;
@@ -3991,7 +3991,7 @@ var require_react_dom_development = __commonJS({
           {
             if (props.value == null) {
               if (typeof props.children === "object" && props.children !== null) {
-                React3.Children.forEach(props.children, function(child) {
+                React7.Children.forEach(props.children, function(child) {
                   if (child == null) {
                     return;
                   }
@@ -9415,7 +9415,7 @@ var require_react_dom_development = __commonJS({
             }
           }
         }
-        function createElement3(type, props, rootContainerElement, parentNamespace) {
+        function createElement7(type, props, rootContainerElement, parentNamespace) {
           var isCustomComponentTag;
           var ownerDocument = getOwnerDocumentFromRootContainer(rootContainerElement);
           var domElement;
@@ -10285,7 +10285,7 @@ var require_react_dom_development = __commonJS({
             }
             parentNamespace = hostContextDev.namespace;
           }
-          var domElement = createElement3(type, props, rootContainerInstance, parentNamespace);
+          var domElement = createElement7(type, props, rootContainerInstance, parentNamespace);
           precacheFiberNode(internalInstanceHandle, domElement);
           updateFiberProps(domElement, props);
           return domElement;
@@ -12019,7 +12019,7 @@ var require_react_dom_development = __commonJS({
             }
           }
           function updateFragment2(returnFiber, current2, fragment, lanes, key) {
-            if (current2 === null || current2.tag !== Fragment2) {
+            if (current2 === null || current2.tag !== Fragment3) {
               var created = createFiberFromFragment(fragment, returnFiber.mode, lanes, key);
               created.return = returnFiber;
               return created;
@@ -12422,7 +12422,7 @@ var require_react_dom_development = __commonJS({
               if (child.key === key) {
                 var elementType = element.type;
                 if (elementType === REACT_FRAGMENT_TYPE) {
-                  if (child.tag === Fragment2) {
+                  if (child.tag === Fragment3) {
                     deleteRemainingChildren(returnFiber, child.sibling);
                     var existing = useFiber(child, element.props.children);
                     existing.return = returnFiber;
@@ -17898,7 +17898,7 @@ var require_react_dom_development = __commonJS({
               var _resolvedProps2 = workInProgress2.elementType === type ? _unresolvedProps2 : resolveDefaultProps(type, _unresolvedProps2);
               return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2);
             }
-            case Fragment2:
+            case Fragment3:
               return updateFragment(current2, workInProgress2, renderLanes2);
             case Mode:
               return updateMode(current2, workInProgress2, renderLanes2);
@@ -18170,7 +18170,7 @@ var require_react_dom_development = __commonJS({
             case SimpleMemoComponent:
             case FunctionComponent:
             case ForwardRef:
-            case Fragment2:
+            case Fragment3:
             case Mode:
             case Profiler:
             case ContextConsumer:
@@ -22431,7 +22431,7 @@ var require_react_dom_development = __commonJS({
           return fiber;
         }
         function createFiberFromFragment(elements, mode, lanes, key) {
-          var fiber = createFiber(Fragment2, elements, key, mode);
+          var fiber = createFiber(Fragment3, elements, key, mode);
           fiber.lanes = lanes;
           return fiber;
         }
@@ -23587,7 +23587,7 @@ var require_react_jsx_runtime_development = __commonJS({
     if (true) {
       (function() {
         "use strict";
-        var React3 = require_react();
+        var React7 = require_react();
         var REACT_ELEMENT_TYPE = Symbol.for("react.element");
         var REACT_PORTAL_TYPE = Symbol.for("react.portal");
         var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -23613,7 +23613,7 @@ var require_react_jsx_runtime_development = __commonJS({
           }
           return null;
         }
-        var ReactSharedInternals = React3.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+        var ReactSharedInternals = React7.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
         function error(format) {
           {
             {
@@ -24495,8 +24495,8 @@ var require_use_sync_external_store_shim_development = __commonJS({
         if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
           __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
         }
-        var React3 = require_react();
-        var ReactSharedInternals = React3.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+        var React7 = require_react();
+        var ReactSharedInternals = React7.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
         function error(format) {
           {
             {
@@ -24526,13 +24526,13 @@ var require_use_sync_external_store_shim_development = __commonJS({
           return x === y && (x !== 0 || 1 / x === 1 / y) || x !== x && y !== y;
         }
         var objectIs = typeof Object.is === "function" ? Object.is : is;
-        var useState4 = React3.useState, useEffect4 = React3.useEffect, useLayoutEffect2 = React3.useLayoutEffect, useDebugValue2 = React3.useDebugValue;
+        var useState4 = React7.useState, useEffect4 = React7.useEffect, useLayoutEffect2 = React7.useLayoutEffect, useDebugValue2 = React7.useDebugValue;
         var didWarnOld18Alpha = false;
         var didWarnUncachedGetSnapshot = false;
         function useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot) {
           {
             if (!didWarnOld18Alpha) {
-              if (React3.startTransition !== void 0) {
+              if (React7.startTransition !== void 0) {
                 didWarnOld18Alpha = true;
                 error("You are using an outdated, pre-release alpha of React 18 that does not support useSyncExternalStore. The use-sync-external-store shim will not work correctly. Upgrade to a newer pre-release.");
               }
@@ -24597,7 +24597,7 @@ var require_use_sync_external_store_shim_development = __commonJS({
         var canUseDOM = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined");
         var isServerEnvironment = !canUseDOM;
         var shim = isServerEnvironment ? useSyncExternalStore$1 : useSyncExternalStore;
-        var useSyncExternalStore$2 = React3.useSyncExternalStore !== void 0 ? React3.useSyncExternalStore : shim;
+        var useSyncExternalStore$2 = React7.useSyncExternalStore !== void 0 ? React7.useSyncExternalStore : shim;
         exports.useSyncExternalStore = useSyncExternalStore$2;
         if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop === "function") {
           __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
@@ -24629,14 +24629,14 @@ var require_with_selector_development = __commonJS({
         if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
           __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
         }
-        var React3 = require_react();
+        var React7 = require_react();
         var shim = require_shim();
         function is(x, y) {
           return x === y && (x !== 0 || 1 / x === 1 / y) || x !== x && y !== y;
         }
         var objectIs = typeof Object.is === "function" ? Object.is : is;
         var useSyncExternalStore = shim.useSyncExternalStore;
-        var useRef2 = React3.useRef, useEffect4 = React3.useEffect, useMemo2 = React3.useMemo, useDebugValue2 = React3.useDebugValue;
+        var useRef2 = React7.useRef, useEffect4 = React7.useEffect, useMemo3 = React7.useMemo, useDebugValue2 = React7.useDebugValue;
         function useSyncExternalStoreWithSelector2(subscribe, getSnapshot, getServerSnapshot, selector, isEqual) {
           var instRef = useRef2(null);
           var inst;
@@ -24649,7 +24649,7 @@ var require_with_selector_development = __commonJS({
           } else {
             inst = instRef.current;
           }
-          var _useMemo = useMemo2(function() {
+          var _useMemo = useMemo3(function() {
             var hasMemo = false;
             var memoizedSnapshot;
             var memoizedSelection;
@@ -24722,8 +24722,11 @@ var require_with_selector = __commonJS({
 });
 
 // src/app.jsx
-var React2 = __toESM(require_react());
+var React6 = __toESM(require_react());
 var ReactDOM = __toESM(require_client());
+
+// src/Config.jsx
+var React5 = __toESM(require_react());
 
 // node_modules/@xyflow/react/dist/esm/index.mjs
 var import_jsx_runtime = __toESM(require_jsx_runtime(), 1);
@@ -29979,11 +29982,11 @@ function XYResizer({ domNode, nodeId, getStoreItems, onChange, onEnd }) {
 // node_modules/@xyflow/react/dist/esm/index.mjs
 var import_react2 = __toESM(require_react(), 1);
 
-// node_modules/zustand/esm/traditional.mjs
+// node_modules/@xyflow/react/node_modules/zustand/esm/traditional.mjs
 var import_react = __toESM(require_react(), 1);
 var import_with_selector = __toESM(require_with_selector(), 1);
 
-// node_modules/zustand/esm/vanilla.mjs
+// node_modules/@xyflow/react/node_modules/zustand/esm/vanilla.mjs
 var createStoreImpl = (createState) => {
   let state;
   const listeners = /* @__PURE__ */ new Set();
@@ -30015,7 +30018,7 @@ var createStoreImpl = (createState) => {
 };
 var createStore = (createState) => createState ? createStoreImpl(createState) : createStoreImpl;
 
-// node_modules/zustand/esm/traditional.mjs
+// node_modules/@xyflow/react/node_modules/zustand/esm/traditional.mjs
 var { useDebugValue } = import_react.default;
 var { useSyncExternalStoreWithSelector } = import_with_selector.default;
 var identity3 = (arg) => arg;
@@ -30038,7 +30041,7 @@ var createWithEqualityFnImpl = (createState, defaultEqualityFn) => {
 };
 var createWithEqualityFn = (createState, defaultEqualityFn) => createState ? createWithEqualityFnImpl(createState, defaultEqualityFn) : createWithEqualityFnImpl;
 
-// node_modules/zustand/esm/shallow.mjs
+// node_modules/@xyflow/react/node_modules/zustand/esm/shallow.mjs
 function shallow$1(objA, objB) {
   if (Object.is(objA, objB)) {
     return true;
@@ -31585,7 +31588,7 @@ function useNodeObserver({ node, nodeType, hasDimensions, resizeObserver }) {
   }, [node.id, nodeType, node.sourcePosition, node.targetPosition]);
   return nodeRef;
 }
-function NodeWrapper({ id: id2, onClick, onMouseEnter, onMouseMove, onMouseLeave, onContextMenu, onDoubleClick, nodesDraggable, elementsSelectable, nodesConnectable, nodesFocusable, resizeObserver, noDragClassName, noPanClassName, disableKeyboardA11y, rfId, nodeTypes: nodeTypes2, nodeExtent, nodeClickDistance, onError }) {
+function NodeWrapper({ id: id2, onClick, onMouseEnter, onMouseMove, onMouseLeave, onContextMenu, onDoubleClick, nodesDraggable, elementsSelectable, nodesConnectable, nodesFocusable, resizeObserver, noDragClassName, noPanClassName, disableKeyboardA11y, rfId, nodeTypes, nodeExtent, nodeClickDistance, onError }) {
   const { node, internals, isParent } = useStore((s) => {
     const node2 = s.nodeLookup.get(id2);
     const isParent2 = s.parentLookup.has(id2);
@@ -31596,7 +31599,7 @@ function NodeWrapper({ id: id2, onClick, onMouseEnter, onMouseMove, onMouseLeave
     };
   }, shallow$1);
   let nodeType = node.type || "default";
-  let NodeComponent = nodeTypes2?.[nodeType] || builtinNodeTypes[nodeType];
+  let NodeComponent = nodeTypes?.[nodeType] || builtinNodeTypes[nodeType];
   if (NodeComponent === void 0) {
     onError?.("003", errorMessages["error003"](nodeType));
     nodeType = "default";
@@ -32288,13 +32291,13 @@ function useStylesLoadedWarning() {
     }
   }, []);
 }
-function GraphViewComponent({ nodeTypes: nodeTypes2, edgeTypes, onInit, onNodeClick, onEdgeClick, onNodeDoubleClick, onEdgeDoubleClick, onNodeMouseEnter, onNodeMouseMove, onNodeMouseLeave, onNodeContextMenu, onSelectionContextMenu, onSelectionStart, onSelectionEnd, connectionLineType, connectionLineStyle, connectionLineComponent, connectionLineContainerStyle, selectionKeyCode, selectionOnDrag, selectionMode, multiSelectionKeyCode, panActivationKeyCode, zoomActivationKeyCode, deleteKeyCode, onlyRenderVisibleElements, elementsSelectable, defaultViewport: defaultViewport2, translateExtent, minZoom, maxZoom, preventScrolling, defaultMarkerColor, zoomOnScroll, zoomOnPinch, panOnScroll, panOnScrollSpeed, panOnScrollMode, zoomOnDoubleClick, panOnDrag, onPaneClick, onPaneMouseEnter, onPaneMouseMove, onPaneMouseLeave, onPaneScroll, onPaneContextMenu, paneClickDistance, nodeClickDistance, onEdgeContextMenu, onEdgeMouseEnter, onEdgeMouseMove, onEdgeMouseLeave, reconnectRadius, onReconnect, onReconnectStart, onReconnectEnd, noDragClassName, noWheelClassName, noPanClassName, disableKeyboardA11y, nodeExtent, rfId, viewport, onViewportChange }) {
-  useNodeOrEdgeTypesWarning(nodeTypes2);
+function GraphViewComponent({ nodeTypes, edgeTypes, onInit, onNodeClick, onEdgeClick, onNodeDoubleClick, onEdgeDoubleClick, onNodeMouseEnter, onNodeMouseMove, onNodeMouseLeave, onNodeContextMenu, onSelectionContextMenu, onSelectionStart, onSelectionEnd, connectionLineType, connectionLineStyle, connectionLineComponent, connectionLineContainerStyle, selectionKeyCode, selectionOnDrag, selectionMode, multiSelectionKeyCode, panActivationKeyCode, zoomActivationKeyCode, deleteKeyCode, onlyRenderVisibleElements, elementsSelectable, defaultViewport: defaultViewport2, translateExtent, minZoom, maxZoom, preventScrolling, defaultMarkerColor, zoomOnScroll, zoomOnPinch, panOnScroll, panOnScrollSpeed, panOnScrollMode, zoomOnDoubleClick, panOnDrag, onPaneClick, onPaneMouseEnter, onPaneMouseMove, onPaneMouseLeave, onPaneScroll, onPaneContextMenu, paneClickDistance, nodeClickDistance, onEdgeContextMenu, onEdgeMouseEnter, onEdgeMouseMove, onEdgeMouseLeave, reconnectRadius, onReconnect, onReconnectStart, onReconnectEnd, noDragClassName, noWheelClassName, noPanClassName, disableKeyboardA11y, nodeExtent, rfId, viewport, onViewportChange }) {
+  useNodeOrEdgeTypesWarning(nodeTypes);
   useNodeOrEdgeTypesWarning(edgeTypes);
   useStylesLoadedWarning();
   useOnInitHandler(onInit);
   useViewportSync(viewport);
-  return (0, import_jsx_runtime.jsx)(FlowRenderer, { onPaneClick, onPaneMouseEnter, onPaneMouseMove, onPaneMouseLeave, onPaneContextMenu, onPaneScroll, paneClickDistance, deleteKeyCode, selectionKeyCode, selectionOnDrag, selectionMode, onSelectionStart, onSelectionEnd, multiSelectionKeyCode, panActivationKeyCode, zoomActivationKeyCode, elementsSelectable, zoomOnScroll, zoomOnPinch, zoomOnDoubleClick, panOnScroll, panOnScrollSpeed, panOnScrollMode, panOnDrag, defaultViewport: defaultViewport2, translateExtent, minZoom, maxZoom, onSelectionContextMenu, preventScrolling, noDragClassName, noWheelClassName, noPanClassName, disableKeyboardA11y, onViewportChange, isControlledViewport: !!viewport, children: (0, import_jsx_runtime.jsxs)(Viewport, { children: [(0, import_jsx_runtime.jsx)(EdgeRenderer, { edgeTypes, onEdgeClick, onEdgeDoubleClick, onReconnect, onReconnectStart, onReconnectEnd, onlyRenderVisibleElements, onEdgeContextMenu, onEdgeMouseEnter, onEdgeMouseMove, onEdgeMouseLeave, reconnectRadius, defaultMarkerColor, noPanClassName, disableKeyboardA11y, rfId }), (0, import_jsx_runtime.jsx)(ConnectionLineWrapper, { style: connectionLineStyle, type: connectionLineType, component: connectionLineComponent, containerStyle: connectionLineContainerStyle }), (0, import_jsx_runtime.jsx)("div", { className: "react-flow__edgelabel-renderer" }), (0, import_jsx_runtime.jsx)(NodeRenderer, { nodeTypes: nodeTypes2, onNodeClick, onNodeDoubleClick, onNodeMouseEnter, onNodeMouseMove, onNodeMouseLeave, onNodeContextMenu, nodeClickDistance, onlyRenderVisibleElements, noPanClassName, noDragClassName, disableKeyboardA11y, nodeExtent, rfId }), (0, import_jsx_runtime.jsx)("div", { className: "react-flow__viewport-portal" })] }) });
+  return (0, import_jsx_runtime.jsx)(FlowRenderer, { onPaneClick, onPaneMouseEnter, onPaneMouseMove, onPaneMouseLeave, onPaneContextMenu, onPaneScroll, paneClickDistance, deleteKeyCode, selectionKeyCode, selectionOnDrag, selectionMode, onSelectionStart, onSelectionEnd, multiSelectionKeyCode, panActivationKeyCode, zoomActivationKeyCode, elementsSelectable, zoomOnScroll, zoomOnPinch, zoomOnDoubleClick, panOnScroll, panOnScrollSpeed, panOnScrollMode, panOnDrag, defaultViewport: defaultViewport2, translateExtent, minZoom, maxZoom, onSelectionContextMenu, preventScrolling, noDragClassName, noWheelClassName, noPanClassName, disableKeyboardA11y, onViewportChange, isControlledViewport: !!viewport, children: (0, import_jsx_runtime.jsxs)(Viewport, { children: [(0, import_jsx_runtime.jsx)(EdgeRenderer, { edgeTypes, onEdgeClick, onEdgeDoubleClick, onReconnect, onReconnectStart, onReconnectEnd, onlyRenderVisibleElements, onEdgeContextMenu, onEdgeMouseEnter, onEdgeMouseMove, onEdgeMouseLeave, reconnectRadius, defaultMarkerColor, noPanClassName, disableKeyboardA11y, rfId }), (0, import_jsx_runtime.jsx)(ConnectionLineWrapper, { style: connectionLineStyle, type: connectionLineType, component: connectionLineComponent, containerStyle: connectionLineContainerStyle }), (0, import_jsx_runtime.jsx)("div", { className: "react-flow__edgelabel-renderer" }), (0, import_jsx_runtime.jsx)(NodeRenderer, { nodeTypes, onNodeClick, onNodeDoubleClick, onNodeMouseEnter, onNodeMouseMove, onNodeMouseLeave, onNodeContextMenu, nodeClickDistance, onlyRenderVisibleElements, noPanClassName, noDragClassName, disableKeyboardA11y, nodeExtent, rfId }), (0, import_jsx_runtime.jsx)("div", { className: "react-flow__viewport-portal" })] }) });
 }
 GraphViewComponent.displayName = "GraphView";
 var GraphView = (0, import_react2.memo)(GraphViewComponent);
@@ -32643,10 +32646,10 @@ var wrapperStyle = {
   position: "relative",
   zIndex: 0
 };
-function ReactFlow({ nodes, edges, defaultNodes, defaultEdges, className, nodeTypes: nodeTypes2, edgeTypes, onNodeClick, onEdgeClick, onInit, onMove, onMoveStart, onMoveEnd, onConnect, onConnectStart, onConnectEnd, onClickConnectStart, onClickConnectEnd, onNodeMouseEnter, onNodeMouseMove, onNodeMouseLeave, onNodeContextMenu, onNodeDoubleClick, onNodeDragStart, onNodeDrag, onNodeDragStop, onNodesDelete, onEdgesDelete, onDelete, onSelectionChange, onSelectionDragStart, onSelectionDrag, onSelectionDragStop, onSelectionContextMenu, onSelectionStart, onSelectionEnd, onBeforeDelete, connectionMode, connectionLineType = ConnectionLineType.Bezier, connectionLineStyle, connectionLineComponent, connectionLineContainerStyle, deleteKeyCode = "Backspace", selectionKeyCode = "Shift", selectionOnDrag = false, selectionMode = SelectionMode.Full, panActivationKeyCode = "Space", multiSelectionKeyCode = isMacOs() ? "Meta" : "Control", zoomActivationKeyCode = isMacOs() ? "Meta" : "Control", snapToGrid, snapGrid, onlyRenderVisibleElements = false, selectNodesOnDrag, nodesDraggable, nodesConnectable, nodesFocusable, nodeOrigin = defaultNodeOrigin, edgesFocusable, edgesReconnectable, elementsSelectable = true, defaultViewport: defaultViewport$1 = defaultViewport, minZoom = 0.5, maxZoom = 2, translateExtent = infiniteExtent, preventScrolling = true, nodeExtent, defaultMarkerColor = "#b1b1b7", zoomOnScroll = true, zoomOnPinch = true, panOnScroll = false, panOnScrollSpeed = 0.5, panOnScrollMode = PanOnScrollMode.Free, zoomOnDoubleClick = true, panOnDrag = true, onPaneClick, onPaneMouseEnter, onPaneMouseMove, onPaneMouseLeave, onPaneScroll, onPaneContextMenu, paneClickDistance = 0, nodeClickDistance = 0, children: children2, onReconnect, onReconnectStart, onReconnectEnd, onEdgeContextMenu, onEdgeDoubleClick, onEdgeMouseEnter, onEdgeMouseMove, onEdgeMouseLeave, reconnectRadius = 10, onNodesChange, onEdgesChange, noDragClassName = "nodrag", noWheelClassName = "nowheel", noPanClassName = "nopan", fitView: fitView2, fitViewOptions, connectOnClick, attributionPosition, proOptions, defaultEdgeOptions, elevateNodesOnSelect, elevateEdgesOnSelect, disableKeyboardA11y = false, autoPanOnConnect, autoPanOnNodeDrag, autoPanSpeed, connectionRadius, isValidConnection, onError, style: style2, id: id2, nodeDragThreshold, viewport, onViewportChange, width, height, colorMode = "light", debug, ...rest }, ref) {
+function ReactFlow({ nodes, edges, defaultNodes, defaultEdges, className, nodeTypes, edgeTypes, onNodeClick, onEdgeClick, onInit, onMove, onMoveStart, onMoveEnd, onConnect, onConnectStart, onConnectEnd, onClickConnectStart, onClickConnectEnd, onNodeMouseEnter, onNodeMouseMove, onNodeMouseLeave, onNodeContextMenu, onNodeDoubleClick, onNodeDragStart, onNodeDrag, onNodeDragStop, onNodesDelete, onEdgesDelete, onDelete, onSelectionChange, onSelectionDragStart, onSelectionDrag, onSelectionDragStop, onSelectionContextMenu, onSelectionStart, onSelectionEnd, onBeforeDelete, connectionMode, connectionLineType = ConnectionLineType.Bezier, connectionLineStyle, connectionLineComponent, connectionLineContainerStyle, deleteKeyCode = "Backspace", selectionKeyCode = "Shift", selectionOnDrag = false, selectionMode = SelectionMode.Full, panActivationKeyCode = "Space", multiSelectionKeyCode = isMacOs() ? "Meta" : "Control", zoomActivationKeyCode = isMacOs() ? "Meta" : "Control", snapToGrid, snapGrid, onlyRenderVisibleElements = false, selectNodesOnDrag, nodesDraggable, nodesConnectable, nodesFocusable, nodeOrigin = defaultNodeOrigin, edgesFocusable, edgesReconnectable, elementsSelectable = true, defaultViewport: defaultViewport$1 = defaultViewport, minZoom = 0.5, maxZoom = 2, translateExtent = infiniteExtent, preventScrolling = true, nodeExtent, defaultMarkerColor = "#b1b1b7", zoomOnScroll = true, zoomOnPinch = true, panOnScroll = false, panOnScrollSpeed = 0.5, panOnScrollMode = PanOnScrollMode.Free, zoomOnDoubleClick = true, panOnDrag = true, onPaneClick, onPaneMouseEnter, onPaneMouseMove, onPaneMouseLeave, onPaneScroll, onPaneContextMenu, paneClickDistance = 0, nodeClickDistance = 0, children: children2, onReconnect, onReconnectStart, onReconnectEnd, onEdgeContextMenu, onEdgeDoubleClick, onEdgeMouseEnter, onEdgeMouseMove, onEdgeMouseLeave, reconnectRadius = 10, onNodesChange, onEdgesChange, noDragClassName = "nodrag", noWheelClassName = "nowheel", noPanClassName = "nopan", fitView: fitView2, fitViewOptions, connectOnClick, attributionPosition, proOptions, defaultEdgeOptions, elevateNodesOnSelect, elevateEdgesOnSelect, disableKeyboardA11y = false, autoPanOnConnect, autoPanOnNodeDrag, autoPanSpeed, connectionRadius, isValidConnection, onError, style: style2, id: id2, nodeDragThreshold, viewport, onViewportChange, width, height, colorMode = "light", debug, ...rest }, ref) {
   const rfId = id2 || "1";
   const colorModeClassName = useColorModeClass(colorMode);
-  return (0, import_jsx_runtime.jsx)("div", { ...rest, style: { ...style2, ...wrapperStyle }, ref, className: cc(["react-flow", className, colorModeClassName]), "data-testid": "rf__wrapper", id: id2, children: (0, import_jsx_runtime.jsxs)(Wrapper, { nodes, edges, width, height, fitView: fitView2, nodeOrigin, nodeExtent, children: [(0, import_jsx_runtime.jsx)(GraphView, { onInit, onNodeClick, onEdgeClick, onNodeMouseEnter, onNodeMouseMove, onNodeMouseLeave, onNodeContextMenu, onNodeDoubleClick, nodeTypes: nodeTypes2, edgeTypes, connectionLineType, connectionLineStyle, connectionLineComponent, connectionLineContainerStyle, selectionKeyCode, selectionOnDrag, selectionMode, deleteKeyCode, multiSelectionKeyCode, panActivationKeyCode, zoomActivationKeyCode, onlyRenderVisibleElements, defaultViewport: defaultViewport$1, translateExtent, minZoom, maxZoom, preventScrolling, zoomOnScroll, zoomOnPinch, zoomOnDoubleClick, panOnScroll, panOnScrollSpeed, panOnScrollMode, panOnDrag, onPaneClick, onPaneMouseEnter, onPaneMouseMove, onPaneMouseLeave, onPaneScroll, onPaneContextMenu, paneClickDistance, nodeClickDistance, onSelectionContextMenu, onSelectionStart, onSelectionEnd, onReconnect, onReconnectStart, onReconnectEnd, onEdgeContextMenu, onEdgeDoubleClick, onEdgeMouseEnter, onEdgeMouseMove, onEdgeMouseLeave, reconnectRadius, defaultMarkerColor, noDragClassName, noWheelClassName, noPanClassName, rfId, disableKeyboardA11y, nodeExtent, viewport, onViewportChange }), (0, import_jsx_runtime.jsx)(StoreUpdater, { nodes, edges, defaultNodes, defaultEdges, onConnect, onConnectStart, onConnectEnd, onClickConnectStart, onClickConnectEnd, nodesDraggable, nodesConnectable, nodesFocusable, edgesFocusable, edgesReconnectable, elementsSelectable, elevateNodesOnSelect, elevateEdgesOnSelect, minZoom, maxZoom, nodeExtent, onNodesChange, onEdgesChange, snapToGrid, snapGrid, connectionMode, translateExtent, connectOnClick, defaultEdgeOptions, fitView: fitView2, fitViewOptions, onNodesDelete, onEdgesDelete, onDelete, onNodeDragStart, onNodeDrag, onNodeDragStop, onSelectionDrag, onSelectionDragStart, onSelectionDragStop, onMove, onMoveStart, onMoveEnd, noPanClassName, nodeOrigin, rfId, autoPanOnConnect, autoPanOnNodeDrag, autoPanSpeed, onError, connectionRadius, isValidConnection, selectNodesOnDrag, nodeDragThreshold, onBeforeDelete, paneClickDistance, debug }), (0, import_jsx_runtime.jsx)(SelectionListener, { onSelectionChange }), children2, (0, import_jsx_runtime.jsx)(Attribution, { proOptions, position: attributionPosition }), (0, import_jsx_runtime.jsx)(A11yDescriptions, { rfId, disableKeyboardA11y })] }) });
+  return (0, import_jsx_runtime.jsx)("div", { ...rest, style: { ...style2, ...wrapperStyle }, ref, className: cc(["react-flow", className, colorModeClassName]), "data-testid": "rf__wrapper", id: id2, children: (0, import_jsx_runtime.jsxs)(Wrapper, { nodes, edges, width, height, fitView: fitView2, nodeOrigin, nodeExtent, children: [(0, import_jsx_runtime.jsx)(GraphView, { onInit, onNodeClick, onEdgeClick, onNodeMouseEnter, onNodeMouseMove, onNodeMouseLeave, onNodeContextMenu, onNodeDoubleClick, nodeTypes, edgeTypes, connectionLineType, connectionLineStyle, connectionLineComponent, connectionLineContainerStyle, selectionKeyCode, selectionOnDrag, selectionMode, deleteKeyCode, multiSelectionKeyCode, panActivationKeyCode, zoomActivationKeyCode, onlyRenderVisibleElements, defaultViewport: defaultViewport$1, translateExtent, minZoom, maxZoom, preventScrolling, zoomOnScroll, zoomOnPinch, zoomOnDoubleClick, panOnScroll, panOnScrollSpeed, panOnScrollMode, panOnDrag, onPaneClick, onPaneMouseEnter, onPaneMouseMove, onPaneMouseLeave, onPaneScroll, onPaneContextMenu, paneClickDistance, nodeClickDistance, onSelectionContextMenu, onSelectionStart, onSelectionEnd, onReconnect, onReconnectStart, onReconnectEnd, onEdgeContextMenu, onEdgeDoubleClick, onEdgeMouseEnter, onEdgeMouseMove, onEdgeMouseLeave, reconnectRadius, defaultMarkerColor, noDragClassName, noWheelClassName, noPanClassName, rfId, disableKeyboardA11y, nodeExtent, viewport, onViewportChange }), (0, import_jsx_runtime.jsx)(StoreUpdater, { nodes, edges, defaultNodes, defaultEdges, onConnect, onConnectStart, onConnectEnd, onClickConnectStart, onClickConnectEnd, nodesDraggable, nodesConnectable, nodesFocusable, edgesFocusable, edgesReconnectable, elementsSelectable, elevateNodesOnSelect, elevateEdgesOnSelect, minZoom, maxZoom, nodeExtent, onNodesChange, onEdgesChange, snapToGrid, snapGrid, connectionMode, translateExtent, connectOnClick, defaultEdgeOptions, fitView: fitView2, fitViewOptions, onNodesDelete, onEdgesDelete, onDelete, onNodeDragStart, onNodeDrag, onNodeDragStop, onSelectionDrag, onSelectionDragStart, onSelectionDragStop, onMove, onMoveStart, onMoveEnd, noPanClassName, nodeOrigin, rfId, autoPanOnConnect, autoPanOnNodeDrag, autoPanSpeed, onError, connectionRadius, isValidConnection, selectNodesOnDrag, nodeDragThreshold, onBeforeDelete, paneClickDistance, debug }), (0, import_jsx_runtime.jsx)(SelectionListener, { onSelectionChange }), children2, (0, import_jsx_runtime.jsx)(Attribution, { proOptions, position: attributionPosition }), (0, import_jsx_runtime.jsx)(A11yDescriptions, { rfId, disableKeyboardA11y })] }) });
 }
 var index = fixedForwardRef(ReactFlow);
 function LinePattern({ dimensions, lineWidth, variant, className }) {
@@ -33054,36 +33057,246 @@ function ResizeControl({ nodeId, position, variant = ResizeControlVariant.Handle
 var NodeResizeControl = (0, import_react2.memo)(ResizeControl);
 
 // src/Config.jsx
-var React = __toESM(require_react());
 var import_react4 = __toESM(require_react());
-var CustomNode = ({ data, style: style2 }) => /* @__PURE__ */ React.createElement("div", { style: { ...style2, padding: "10px" } }, /* @__PURE__ */ React.createElement(
-  Handle,
-  {
-    type: "target",
-    position: "left",
-    style: { background: "#555" }
-  }
-), /* @__PURE__ */ React.createElement("div", null, data.label), /* @__PURE__ */ React.createElement(
-  Handle,
-  {
-    type: "source",
-    position: "right",
-    style: { background: "#555" }
-  }
-));
-var nodeTypes = {
-  customNode: CustomNode
+
+// src/components/NodeDetails.jsx
+var React4 = __toESM(require_react());
+
+// src/components/forms/SourceNodeForm.jsx
+var React2 = __toESM(require_react());
+
+// src/components/common/FormField.jsx
+var React = __toESM(require_react());
+var FormField = ({
+  label,
+  type = "text",
+  value,
+  onChange,
+  options = [],
+  placeholder = ""
+}) => {
+  return /* @__PURE__ */ React.createElement("div", { className: "form-field" }, /* @__PURE__ */ React.createElement("label", null, label), type === "select" ? /* @__PURE__ */ React.createElement(
+    "select",
+    {
+      value,
+      onChange: (e) => onChange(e.target.value),
+      className: "form-select"
+    },
+    options.map((opt) => /* @__PURE__ */ React.createElement("option", { key: opt, value: opt }, opt))
+  ) : /* @__PURE__ */ React.createElement(
+    "input",
+    {
+      type,
+      value,
+      onChange: (e) => onChange(e.target.value),
+      placeholder,
+      className: "form-input"
+    }
+  ));
+};
+
+// src/components/forms/SourceNodeForm.jsx
+var SourceNodeForm = ({ data, onUpdate }) => {
+  return /* @__PURE__ */ React2.createElement("div", { className: "node-form" }, /* @__PURE__ */ React2.createElement(
+    FormField,
+    {
+      label: "Source Name",
+      value: data.label,
+      onChange: (value) => onUpdate({ ...data, label: value })
+    }
+  ), /* @__PURE__ */ React2.createElement(
+    FormField,
+    {
+      label: "Source Type",
+      type: "select",
+      options: ["Volume", "Delta Table"],
+      value: data.sourceType,
+      onChange: (value) => onUpdate({ ...data, sourceType: value })
+    }
+  ));
+};
+
+// src/components/forms/StepNodeForm.jsx
+var React3 = __toESM(require_react());
+var StepNodeForm = ({ data, onUpdate }) => {
+  return /* @__PURE__ */ React3.createElement("div", { className: "node-form" }, /* @__PURE__ */ React3.createElement(
+    FormField,
+    {
+      label: "Step Name",
+      value: data.label,
+      onChange: (value) => onUpdate({ ...data, label: value })
+    }
+  ), /* @__PURE__ */ React3.createElement(
+    FormField,
+    {
+      label: "Operation",
+      type: "select",
+      options: ["filter", "transform", "join"],
+      value: data.operation,
+      onChange: (value) => onUpdate({ ...data, operation: value })
+    }
+  ));
+};
+
+// src/components/NodeDetails.jsx
+function NodeDetails({ selectedNode, onUpdate, onClose }) {
+  console.log("Selected Node:", selectedNode);
+  const getFormComponent = (node) => {
+    switch (node?.type) {
+      case "source":
+        return /* @__PURE__ */ React4.createElement(SourceNodeForm, { data: node, onUpdate });
+      case "step":
+        return /* @__PURE__ */ React4.createElement(StepNodeForm, { data: node, onUpdate });
+      case "output":
+        return /* @__PURE__ */ React4.createElement("h3", null, "Output Form (Coming Soon)");
+      default:
+        return /* @__PURE__ */ React4.createElement("h3", null, "Select a node type");
+    }
+  };
+  return /* @__PURE__ */ React4.createElement("div", { style: {
+    background: "#2a2a2a",
+    padding: "20px",
+    borderRadius: "4px",
+    color: "white"
+  } }, getFormComponent(selectedNode));
+}
+
+// src/Config.jsx
+var CustomNode = ({ data, style: style2 }) => {
+  const [isExpanded, setIsExpanded] = (0, import_react4.useState)(false);
+  return /* @__PURE__ */ React5.createElement("div", { style: {
+    ...style2,
+    padding: "10px",
+    width: isExpanded ? "300px" : "150px",
+    transition: "all 0.3s ease"
+  } }, /* @__PURE__ */ React5.createElement(
+    Handle,
+    {
+      type: "target",
+      position: "left",
+      style: { background: "#555" }
+    }
+  ), /* @__PURE__ */ React5.createElement("div", { style: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
+  } }, /* @__PURE__ */ React5.createElement("div", null, data.label), /* @__PURE__ */ React5.createElement("div", { style: { display: "flex", gap: "4px" } }, /* @__PURE__ */ React5.createElement(
+    "button",
+    {
+      onClick: () => data.onEdit(data),
+      style: {
+        background: "transparent",
+        border: "1px solid white",
+        color: "white",
+        borderRadius: "3px",
+        cursor: "pointer",
+        padding: "2px 6px"
+      }
+    },
+    "\u270E"
+  ), /* @__PURE__ */ React5.createElement(
+    "button",
+    {
+      onClick: () => setIsExpanded(!isExpanded),
+      style: {
+        background: "transparent",
+        border: "1px solid white",
+        color: "white",
+        borderRadius: "3px",
+        cursor: "pointer",
+        padding: "2px 6px"
+      }
+    },
+    isExpanded ? "\u2212" : "+"
+  ))), isExpanded && /* @__PURE__ */ React5.createElement("div", { style: {
+    marginTop: "10px",
+    padding: "8px",
+    background: "rgba(255, 255, 255, 0.1)",
+    borderRadius: "3px"
+  } }, data.type === "source" && /* @__PURE__ */ React5.createElement(React5.Fragment, null, /* @__PURE__ */ React5.createElement("div", null, "Catalog: ", data.catalog || "N/A"), /* @__PURE__ */ React5.createElement("div", null, "Schema: ", data.schema || "N/A"), /* @__PURE__ */ React5.createElement("div", null, "Volume: ", data.volume_name || "N/A"), /* @__PURE__ */ React5.createElement(
+    "a",
+    {
+      href: data.workspace_link,
+      target: "_blank",
+      rel: "noopener noreferrer",
+      style: {
+        color: "#fff",
+        textDecoration: "underline",
+        cursor: "pointer",
+        pointerEvents: "all"
+      }
+    },
+    "View in Workspace"
+  )), data.type === "step" && /* @__PURE__ */ React5.createElement(React5.Fragment, null, /* @__PURE__ */ React5.createElement("div", null, "Operation: ", data.operation || "N/A"), /* @__PURE__ */ React5.createElement("div", null, "Parameters: ", JSON.stringify(data.parameters) || "None")), data.type === "output" && /* @__PURE__ */ React5.createElement(React5.Fragment, null, /* @__PURE__ */ React5.createElement("div", null, "Output Type: ", data.outputType || "N/A"), /* @__PURE__ */ React5.createElement("div", null, "Destination: ", data.destination || "N/A"))), /* @__PURE__ */ React5.createElement(
+    Handle,
+    {
+      type: "source",
+      position: "right",
+      style: { background: "#555" }
+    }
+  ));
 };
 var layoutConfig = {
-  "source": { x: 0, y: 0 },
-  "step": { x: 300, y: 0 },
-  "output": { x: 600, y: 0 }
+  "source": { x: 100, y: 50 },
+  "step": { x: 600, y: 50 },
+  "output": { x: 1100, y: 50 }
 };
 var nodeStyles = {
-  source: { border: "2px solid #4CAF50", background: "white", borderRadius: "5px" },
-  step: { border: "2px solid #2196F3", background: "white", borderRadius: "5px" },
-  output: { border: "2px solid #9C27B0", background: "white", borderRadius: "5px" }
+  source: {
+    border: "2px solid #CD7F32",
+    // Bronze
+    background: "linear-gradient(145deg, #CD7F32, #8B4513)",
+    borderRadius: "5px",
+    color: "white"
+  },
+  step: {
+    border: "2px solid #C0C0C0",
+    // Silver
+    background: "linear-gradient(145deg, #C0C0C0, #808080)",
+    borderRadius: "5px",
+    color: "white"
+  },
+  output: {
+    border: "2px solid #FFD700",
+    // Gold
+    background: "linear-gradient(145deg, #FFD700, #DAA520)",
+    borderRadius: "5px",
+    color: "white"
+  }
 };
+var getLayoutedElements = (nodes, edges) => {
+  const nodesByParent = nodes.reduce((acc, node) => {
+    if (node.parentId) {
+      if (!acc[node.parentId]) {
+        acc[node.parentId] = [];
+      }
+      acc[node.parentId].push(node);
+    }
+    return acc;
+  }, {});
+  const layoutedNodes = nodes.map((node) => {
+    if (node.type === "groupNode") {
+      return node;
+    }
+    const siblings = nodesByParent[node.parentId] || [];
+    const indexInGroup = siblings.findIndex((n) => n.id === node.id);
+    const row = Math.floor(indexInGroup / 2);
+    const col = indexInGroup % 2;
+    return {
+      ...node,
+      position: {
+        x: col * 200,
+        // 200px horizontal spacing between nodes
+        y: row * 120
+        // 120px vertical spacing between rows
+      }
+    };
+  });
+  return { nodes: layoutedNodes, edges };
+};
+function ConfigWidgetWrapper() {
+  return /* @__PURE__ */ React5.createElement(ReactFlowProvider, null, /* @__PURE__ */ React5.createElement(ConfigWidget, null));
+}
 function ConfigWidget() {
   const [dataSources] = useModelState("data_sources");
   const [processingSteps] = useModelState("processing_steps");
@@ -33091,6 +33304,65 @@ function ConfigWidget() {
   const [configEdges, setConfigEdges] = useModelState("edges");
   const [nodes, setNodes] = (0, import_react4.useState)([]);
   const [edges, setEdges] = (0, import_react4.useState)(configEdges);
+  const [selectedNode, setSelectedNode] = (0, import_react4.useState)(null);
+  const GroupNode2 = ({ data }) => {
+    return /* @__PURE__ */ React5.createElement("div", { style: {
+      padding: "20px",
+      background: "rgba(0, 0, 0, 0.3)",
+      border: "1px solid rgba(255, 255, 255, 0.1)",
+      borderRadius: "8px",
+      minWidth: "400px",
+      minHeight: "200px",
+      display: "flex",
+      flexDirection: "column",
+      gap: "20px"
+    } }, /* @__PURE__ */ React5.createElement("div", { style: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+      paddingBottom: "8px"
+    } }, /* @__PURE__ */ React5.createElement("div", { style: { color: "white", fontSize: "16px" } }, data.label), /* @__PURE__ */ React5.createElement(
+      "button",
+      {
+        onClick: (e) => {
+          e.stopPropagation();
+          setSelectedNode(data.label === "Data Sources" ? "source" : data.label === "Processing Steps" ? "step" : "output");
+        },
+        style: {
+          background: "rgba(255, 255, 255, 0.1)",
+          border: "1px solid rgba(255, 255, 255, 0.2)",
+          color: "white",
+          padding: "6px 12px",
+          borderRadius: "4px",
+          cursor: "pointer",
+          fontSize: "12px"
+        }
+      },
+      "+ Add ",
+      data.label.slice(0, -1)
+    )));
+  };
+  const nodeTypes = (0, import_react4.useMemo)(() => ({
+    groupNode: GroupNode2,
+    customNode: CustomNode
+  }), []);
+  const handleNodeClick2 = (event, node) => {
+    if (node.type === "groupNode") {
+      return;
+    }
+    setSelectedNode(node);
+  };
+  const handleNodeUpdate = (nodeId, newData) => {
+    setNodes(
+      (nds) => nds.map(
+        (node) => node.id === nodeId ? { ...node, data: { ...node.data, ...newData } } : node
+      )
+    );
+  };
+  const handleSaveNode = (nodeId, newData) => {
+    console.log("Saving node:", nodeId, newData);
+  };
   (0, import_react4.useEffect)(() => {
     setEdges(configEdges);
   }, [configEdges]);
@@ -33134,39 +33406,90 @@ function ConfigWidget() {
     [setConfigEdges]
   );
   (0, import_react4.useEffect)(() => {
+    const groupNodes = [
+      {
+        id: "sources-group",
+        type: "groupNode",
+        position: { x: layoutConfig.source.x, y: layoutConfig.source.y },
+        data: {
+          label: "Data Sources",
+          onClick: createNewDataSource
+        }
+      },
+      {
+        id: "steps-group",
+        type: "groupNode",
+        position: { x: layoutConfig.step.x, y: layoutConfig.step.y },
+        data: {
+          label: "Processing Steps",
+          onClick: createNewProcessingStep
+        }
+      },
+      {
+        id: "outputs-group",
+        type: "groupNode",
+        position: { x: layoutConfig.output.x, y: layoutConfig.output.y },
+        data: {
+          label: "Outputs",
+          onClick: createNewOutput
+        }
+      }
+    ];
     const initialNodes = [
+      ...groupNodes,
       ...dataSources.map((source, index2) => ({
         id: source.id,
         type: "customNode",
-        position: {
-          x: layoutConfig.source.x,
-          y: layoutConfig.source.y + index2 * 100
+        parentId: "sources-group",
+        position: { x: 25, y: index2 * 100 + 50 },
+        data: {
+          label: source.label,
+          type: "source",
+          catalog: source.catalog,
+          schema: source.schema,
+          table: source.table,
+          workspace_link: source.workspace_link,
+          volume_name: source.volume_name,
+          onEdit: (nodeData) => setSelectedNode(nodeData)
         },
-        data: { label: source.label },
         style: nodeStyles.source
       })),
       ...processingSteps.map((step, index2) => ({
         id: step.id,
         type: "customNode",
-        position: {
-          x: layoutConfig.step.x,
-          y: layoutConfig.step.y + index2 * 100
+        parentId: "steps-group",
+        position: { x: 25, y: index2 * 100 + 50 },
+        data: {
+          label: step.label,
+          type: "step",
+          operation: step.operation,
+          parameters: step.parameters,
+          onEdit: (nodeData) => setSelectedNode(nodeData)
         },
-        data: { label: step.label },
         style: nodeStyles.step
       })),
       ...outputs.map((output, index2) => ({
         id: output.id,
         type: "customNode",
-        position: {
-          x: layoutConfig.output.x,
-          y: layoutConfig.output.y + index2 * 100
+        parentId: "outputs-group",
+        position: { x: 25, y: index2 * 100 + 50 },
+        data: {
+          label: output.label,
+          type: "output",
+          outputType: output.outputType,
+          destination: output.destination,
+          onEdit: (nodeData) => setSelectedNode(nodeData)
         },
-        data: { label: output.label },
         style: nodeStyles.output
       }))
     ];
     setNodes(initialNodes);
+  }, [dataSources, processingSteps, outputs]);
+  (0, import_react4.useEffect)(() => {
+    if (nodes.length > 0) {
+      const { nodes: layoutedNodes } = getLayoutedElements(nodes, edges);
+      setNodes(layoutedNodes);
+    }
   }, [dataSources, processingSteps, outputs]);
   const flowEdges = edges.map((edge) => ({
     ...edge,
@@ -33176,30 +33499,87 @@ function ConfigWidget() {
       strokeWidth: 2
     }
   }));
-  return /* @__PURE__ */ React.createElement("div", { style: { width: "100%", height: "600px" } }, /* @__PURE__ */ React.createElement(
+  const createNewDataSource = (0, import_react4.useCallback)(() => {
+    const newId2 = `source-${Date.now()}`;
+    const newNode = {
+      id: newId2,
+      type: "customNode",
+      parentId: "sources-group",
+      position: { x: 25, y: dataSources.length * 100 + 50 },
+      data: {
+        label: "New Source",
+        type: "source",
+        catalog: "",
+        schema: "",
+        table: "",
+        workspace_link: ""
+      },
+      style: nodeStyles.source
+    };
+    setNodes((nodes2) => [...nodes2, newNode]);
+  }, [dataSources.length]);
+  const createNewProcessingStep = (0, import_react4.useCallback)(() => {
+    const newId2 = `step-${Date.now()}`;
+    const newNode = {
+      id: newId2,
+      type: "customNode",
+      parentId: "steps-group",
+      position: { x: 25, y: processingSteps.length * 100 + 50 },
+      data: {
+        label: "New Step",
+        type: "step",
+        operation: "",
+        parameters: {}
+      },
+      style: nodeStyles.step
+    };
+    setNodes((nodes2) => [...nodes2, newNode]);
+  }, [processingSteps.length]);
+  const createNewOutput = (0, import_react4.useCallback)(() => {
+    const newId2 = `output-${Date.now()}`;
+    const newNode = {
+      id: newId2,
+      type: "customNode",
+      parentId: "outputs-group",
+      position: { x: 25, y: outputs.length * 100 + 50 },
+      data: {
+        label: "New Output",
+        type: "output",
+        outputType: "",
+        destination: ""
+      },
+      style: nodeStyles.output
+    };
+    setNodes((nodes2) => [...nodes2, newNode]);
+  }, [outputs.length]);
+  return /* @__PURE__ */ React5.createElement("div", { style: { width: "100%", height: "600px" } }, /* @__PURE__ */ React5.createElement(ReactFlowProvider, null, /* @__PURE__ */ React5.createElement(
     index,
     {
       nodes,
-      edges: flowEdges,
-      nodeTypes,
+      edges,
       onNodesChange,
       onEdgesChange,
       onConnect,
-      fitView: true,
-      attributionPosition: "bottom-left",
-      defaultEdgeOptions: {
-        type: "smoothstep"
-      }
+      nodeTypes,
+      fitView: true
     },
-    /* @__PURE__ */ React.createElement(Controls, null),
-    /* @__PURE__ */ React.createElement(Background, { variant: "dots", gap: 12, size: 1 })
-  ));
+    /* @__PURE__ */ React5.createElement(Controls, null),
+    /* @__PURE__ */ React5.createElement(Background, null),
+    selectedNode && /* @__PURE__ */ React5.createElement(Panel, { position: "bottom-center" }, /* @__PURE__ */ React5.createElement(
+      NodeDetails,
+      {
+        selectedNode,
+        onUpdate: handleNodeUpdate,
+        onClose: () => setSelectedNode(null)
+      }
+    ))
+  )));
 }
 
 // src/app.jsx
-var RenderContext = React2.createContext(null);
+var RenderContext = React6.createContext(null);
 function useRenderContext() {
-  let ctx = React2.useContext(RenderContext);
+  let ctx = React6.useContext(RenderContext);
   if (!ctx) throw new Error("RenderContext not found");
   return ctx;
 }
@@ -33209,8 +33589,8 @@ function useModel() {
 }
 function useModelState(key) {
   let model = useModel();
-  let [value, setValue] = React2.useState(model.get(key));
-  React2.useEffect(() => {
+  let [value, setValue] = React6.useState(model.get(key));
+  React6.useEffect(() => {
     let callback = () => setValue(model.get(key));
     model.on(`change:${key}`, callback);
     return () => model.off(`change:${key}`, callback);
@@ -33227,12 +33607,12 @@ function createRender(Widget) {
   return ({ el, model, experimental }) => {
     let root2 = ReactDOM.createRoot(el);
     root2.render(
-      /* @__PURE__ */ React2.createElement(React2.StrictMode, null, /* @__PURE__ */ React2.createElement(RenderContext.Provider, { value: { model, experimental } }, /* @__PURE__ */ React2.createElement(Widget, null)))
+      /* @__PURE__ */ React6.createElement(React6.StrictMode, null, /* @__PURE__ */ React6.createElement(RenderContext.Provider, { value: { model, experimental } }, /* @__PURE__ */ React6.createElement(Widget, null)))
     );
     return () => root2.unmount();
   };
 }
-var app_default = { render: createRender(ConfigWidget) };
+var app_default = { render: createRender(ConfigWidgetWrapper) };
 export {
   createRender,
   app_default as default,
