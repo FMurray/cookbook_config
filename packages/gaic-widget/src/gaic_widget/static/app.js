@@ -1031,7 +1031,7 @@ var require_react_development = __commonJS({
           }
           return false;
         }
-        function memo2(type, compare) {
+        function memo3(type, compare) {
           {
             if (!isValidElementType(type)) {
               error("memo: The first argument must be a component. Instead received: %s", type === null ? "null" : typeof type);
@@ -1083,7 +1083,7 @@ var require_react_development = __commonJS({
           }
           return dispatcher.useContext(Context);
         }
-        function useState4(initialState) {
+        function useState6(initialState) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useState(initialState);
         }
@@ -1095,7 +1095,7 @@ var require_react_development = __commonJS({
           var dispatcher = resolveDispatcher();
           return dispatcher.useRef(initialValue);
         }
-        function useEffect4(create2, deps) {
+        function useEffect7(create2, deps) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useEffect(create2, deps);
         }
@@ -1107,7 +1107,7 @@ var require_react_development = __commonJS({
           var dispatcher = resolveDispatcher();
           return dispatcher.useLayoutEffect(create2, deps);
         }
-        function useCallback3(callback, deps) {
+        function useCallback5(callback, deps) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useCallback(callback, deps);
         }
@@ -1871,14 +1871,14 @@ var require_react_development = __commonJS({
         exports.forwardRef = forwardRef2;
         exports.isValidElement = isValidElement;
         exports.lazy = lazy;
-        exports.memo = memo2;
+        exports.memo = memo3;
         exports.startTransition = startTransition;
         exports.unstable_act = act;
-        exports.useCallback = useCallback3;
+        exports.useCallback = useCallback5;
         exports.useContext = useContext3;
         exports.useDebugValue = useDebugValue2;
         exports.useDeferredValue = useDeferredValue;
-        exports.useEffect = useEffect4;
+        exports.useEffect = useEffect7;
         exports.useId = useId;
         exports.useImperativeHandle = useImperativeHandle;
         exports.useInsertionEffect = useInsertionEffect;
@@ -1886,7 +1886,7 @@ var require_react_development = __commonJS({
         exports.useMemo = useMemo3;
         exports.useReducer = useReducer;
         exports.useRef = useRef2;
-        exports.useState = useState4;
+        exports.useState = useState6;
         exports.useSyncExternalStore = useSyncExternalStore;
         exports.useTransition = useTransition;
         exports.version = ReactVersion;
@@ -2382,9 +2382,9 @@ var require_react_dom_development = __commonJS({
         if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
           __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
         }
-        var React7 = require_react();
+        var React9 = require_react();
         var Scheduler = require_scheduler();
-        var ReactSharedInternals = React7.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+        var ReactSharedInternals = React9.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
         var suppressWarning = false;
         function setSuppressWarning(newSuppressWarning) {
           {
@@ -3991,7 +3991,7 @@ var require_react_dom_development = __commonJS({
           {
             if (props.value == null) {
               if (typeof props.children === "object" && props.children !== null) {
-                React7.Children.forEach(props.children, function(child) {
+                React9.Children.forEach(props.children, function(child) {
                   if (child == null) {
                     return;
                   }
@@ -23587,7 +23587,7 @@ var require_react_jsx_runtime_development = __commonJS({
     if (true) {
       (function() {
         "use strict";
-        var React7 = require_react();
+        var React9 = require_react();
         var REACT_ELEMENT_TYPE = Symbol.for("react.element");
         var REACT_PORTAL_TYPE = Symbol.for("react.portal");
         var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
@@ -23613,7 +23613,7 @@ var require_react_jsx_runtime_development = __commonJS({
           }
           return null;
         }
-        var ReactSharedInternals = React7.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+        var ReactSharedInternals = React9.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
         function error(format) {
           {
             {
@@ -24495,8 +24495,8 @@ var require_use_sync_external_store_shim_development = __commonJS({
         if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
           __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
         }
-        var React7 = require_react();
-        var ReactSharedInternals = React7.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+        var React9 = require_react();
+        var ReactSharedInternals = React9.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
         function error(format) {
           {
             {
@@ -24526,13 +24526,13 @@ var require_use_sync_external_store_shim_development = __commonJS({
           return x === y && (x !== 0 || 1 / x === 1 / y) || x !== x && y !== y;
         }
         var objectIs = typeof Object.is === "function" ? Object.is : is;
-        var useState4 = React7.useState, useEffect4 = React7.useEffect, useLayoutEffect2 = React7.useLayoutEffect, useDebugValue2 = React7.useDebugValue;
+        var useState6 = React9.useState, useEffect7 = React9.useEffect, useLayoutEffect2 = React9.useLayoutEffect, useDebugValue2 = React9.useDebugValue;
         var didWarnOld18Alpha = false;
         var didWarnUncachedGetSnapshot = false;
         function useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot) {
           {
             if (!didWarnOld18Alpha) {
-              if (React7.startTransition !== void 0) {
+              if (React9.startTransition !== void 0) {
                 didWarnOld18Alpha = true;
                 error("You are using an outdated, pre-release alpha of React 18 that does not support useSyncExternalStore. The use-sync-external-store shim will not work correctly. Upgrade to a newer pre-release.");
               }
@@ -24548,7 +24548,7 @@ var require_use_sync_external_store_shim_development = __commonJS({
               }
             }
           }
-          var _useState = useState4({
+          var _useState = useState6({
             inst: {
               value,
               getSnapshot
@@ -24563,7 +24563,7 @@ var require_use_sync_external_store_shim_development = __commonJS({
               });
             }
           }, [subscribe, value, getSnapshot]);
-          useEffect4(function() {
+          useEffect7(function() {
             if (checkIfSnapshotChanged(inst)) {
               forceUpdate({
                 inst
@@ -24597,7 +24597,7 @@ var require_use_sync_external_store_shim_development = __commonJS({
         var canUseDOM = !!(typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined");
         var isServerEnvironment = !canUseDOM;
         var shim = isServerEnvironment ? useSyncExternalStore$1 : useSyncExternalStore;
-        var useSyncExternalStore$2 = React7.useSyncExternalStore !== void 0 ? React7.useSyncExternalStore : shim;
+        var useSyncExternalStore$2 = React9.useSyncExternalStore !== void 0 ? React9.useSyncExternalStore : shim;
         exports.useSyncExternalStore = useSyncExternalStore$2;
         if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop === "function") {
           __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
@@ -24629,14 +24629,14 @@ var require_with_selector_development = __commonJS({
         if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== "undefined" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart === "function") {
           __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
         }
-        var React7 = require_react();
+        var React9 = require_react();
         var shim = require_shim();
         function is(x, y) {
           return x === y && (x !== 0 || 1 / x === 1 / y) || x !== x && y !== y;
         }
         var objectIs = typeof Object.is === "function" ? Object.is : is;
         var useSyncExternalStore = shim.useSyncExternalStore;
-        var useRef2 = React7.useRef, useEffect4 = React7.useEffect, useMemo3 = React7.useMemo, useDebugValue2 = React7.useDebugValue;
+        var useRef2 = React9.useRef, useEffect7 = React9.useEffect, useMemo3 = React9.useMemo, useDebugValue2 = React9.useDebugValue;
         function useSyncExternalStoreWithSelector2(subscribe, getSnapshot, getServerSnapshot, selector, isEqual) {
           var instRef = useRef2(null);
           var inst;
@@ -24693,7 +24693,7 @@ var require_with_selector_development = __commonJS({
             return [getSnapshotWithSelector, getServerSnapshotWithSelector];
           }, [getSnapshot, getServerSnapshot, selector, isEqual]), getSelection = _useMemo[0], getServerSelection = _useMemo[1];
           var value = useSyncExternalStore(subscribe, getSelection, getServerSelection);
-          useEffect4(function() {
+          useEffect7(function() {
             inst.hasValue = true;
             inst.value = value;
           }, [value]);
@@ -24722,11 +24722,11 @@ var require_with_selector = __commonJS({
 });
 
 // src/app.jsx
-var React6 = __toESM(require_react());
+var React8 = __toESM(require_react());
 var ReactDOM = __toESM(require_client());
 
 // src/Config.jsx
-var React5 = __toESM(require_react());
+var React7 = __toESM(require_react());
 
 // node_modules/@xyflow/react/dist/esm/index.mjs
 var import_jsx_runtime = __toESM(require_jsx_runtime(), 1);
@@ -33057,13 +33057,14 @@ function ResizeControl({ nodeId, position, variant = ResizeControlVariant.Handle
 var NodeResizeControl = (0, import_react2.memo)(ResizeControl);
 
 // src/Config.jsx
-var import_react4 = __toESM(require_react());
+var import_react5 = __toESM(require_react());
 
 // src/components/NodeDetails.jsx
-var React4 = __toESM(require_react());
+var React6 = __toESM(require_react());
 
 // src/components/forms/SourceNodeForm.jsx
-var React2 = __toESM(require_react());
+var React4 = __toESM(require_react());
+var import_react3 = __toESM(require_react());
 
 // src/components/common/FormField.jsx
 var React = __toESM(require_react());
@@ -33095,38 +33096,165 @@ var FormField = ({
   ));
 };
 
+// src/components/hooks/useCatalogSchemas.js
+var React2 = __toESM(require_react());
+function useCatalogSchemas() {
+  const model = useModel();
+  const [schemas, setSchemas] = useModelState("schemas");
+  React2.useEffect(() => {
+    function handleSchemaUpdate(msg) {
+      if (msg.type === "schema_update") {
+        setSchemas(msg.schemas);
+      }
+    }
+    model.on("msg:custom", handleSchemaUpdate);
+    return () => model.off("msg:custom", handleSchemaUpdate);
+  }, [model]);
+  const requestSchemas = React2.useCallback((catalogName) => {
+    if (catalogName) {
+      model.send({
+        type: "catalog_selected",
+        catalog: catalogName
+      });
+    }
+  }, [model]);
+  return { schemas, requestSchemas };
+}
+
+// src/components/hooks/useSchemaVolumes.js
+var React3 = __toESM(require_react());
+function useSchemaVolumes() {
+  const model = useModel();
+  const [volumes, setVolumes] = React3.useState([]);
+  React3.useEffect(() => {
+    function handleVolumeUpdate(msg) {
+      if (msg.type === "volume_update") {
+        setVolumes(msg.volumes);
+      }
+    }
+    model.on("msg:custom", handleVolumeUpdate);
+    return () => model.off("msg:custom", handleVolumeUpdate);
+  }, [model]);
+  const requestVolumes = React3.useCallback((catalogName, schemaName) => {
+    model.send({ type: "volume_request", catalog: catalogName, schema: schemaName });
+  }, [model]);
+  return { volumes, requestVolumes };
+}
+
 // src/components/forms/SourceNodeForm.jsx
 var SourceNodeForm = ({ data, onUpdate }) => {
-  return /* @__PURE__ */ React2.createElement("div", { className: "node-form" }, /* @__PURE__ */ React2.createElement(
-    FormField,
-    {
-      label: "Source Name",
-      value: data.label,
-      onChange: (value) => onUpdate({ ...data, label: value })
+  const [catalogs] = useModelState("catalogs");
+  const { schemas, requestSchemas } = useCatalogSchemas();
+  const [selectedSchema, setSelectedSchema] = (0, import_react3.useState)(data.schema || "");
+  const [customSchema, setCustomSchema] = (0, import_react3.useState)("");
+  const [selectedVolume, setSelectedVolume] = (0, import_react3.useState)(data.volume_name || "");
+  const model = useModel();
+  const { volumes, requestVolumes } = useSchemaVolumes();
+  const handleCatalogChange = (value) => {
+    console.log("Catalog changed to:", value);
+    requestSchemas(value);
+    onUpdate({ ...data, catalog: value });
+  };
+  const handleSchemaChange = (value) => {
+    if (value === "Custom") {
+      setSelectedSchema("");
+      onUpdate({ ...data, schema: "" });
+    } else {
+      setSelectedSchema(value);
+      onUpdate({ ...data, schema: value });
+      if (data.catalog && value) {
+        requestVolumes(data.catalog, value);
+      }
     }
-  ), /* @__PURE__ */ React2.createElement(
+  };
+  const handleCustomSchemaChange = (value) => {
+    setCustomSchema(value);
+    onUpdate({ ...data, schema: value });
+  };
+  React4.useEffect(() => {
+    if (data.catalog) {
+      requestSchemas(data.catalog);
+    }
+  }, []);
+  React4.useEffect(() => {
+    if (data.catalog && data.schema) {
+      requestVolumes(data.catalog, data.schema);
+    }
+  }, []);
+  const handleVolumeRequest = (catalog, schema) => {
+    console.log("Requesting volumes for", catalog, schema);
+    model.send({
+      type: "volume_request",
+      catalog,
+      schema
+    });
+  };
+  const handleSave = () => {
+    console.log("Saving form data:", data);
+    model.send({
+      type: "save_source_node",
+      data: {
+        ...data,
+        schema: selectedSchema === "Custom" ? customSchema : selectedSchema
+      }
+    });
+  };
+  return /* @__PURE__ */ React4.createElement("div", { className: "node-form" }, /* @__PURE__ */ React4.createElement("h3", null, data.label), /* @__PURE__ */ React4.createElement(
     FormField,
     {
-      label: "Source Type",
+      label: "Catalog",
       type: "select",
-      options: ["Volume", "Delta Table"],
-      value: data.sourceType,
-      onChange: (value) => onUpdate({ ...data, sourceType: value })
+      options: catalogs,
+      value: data.catalog,
+      onChange: handleCatalogChange
     }
+  ), /* @__PURE__ */ React4.createElement(
+    FormField,
+    {
+      label: "Schema",
+      type: "select",
+      options: [...schemas || [], "Custom"],
+      value: selectedSchema || "Custom",
+      onChange: handleSchemaChange
+    }
+  ), (selectedSchema === "" || selectedSchema === "Custom") && /* @__PURE__ */ React4.createElement(
+    FormField,
+    {
+      label: "Custom Schema",
+      value: customSchema,
+      onChange: handleCustomSchemaChange
+    }
+  ), /* @__PURE__ */ React4.createElement(
+    FormField,
+    {
+      label: "Volume",
+      type: "select",
+      options: [...new Set([...volumes, data.volume_name].filter(Boolean))],
+      value: data.volume_name,
+      onChange: (value) => onUpdate({ ...data, volume_name: value })
+    }
+  ), /* @__PURE__ */ React4.createElement(
+    "button",
+    {
+      className: "save-button",
+      onClick: handleSave,
+      disabled: !data.catalog || !selectedSchema && !customSchema
+    },
+    "Save"
   ));
 };
 
 // src/components/forms/StepNodeForm.jsx
-var React3 = __toESM(require_react());
+var React5 = __toESM(require_react());
 var StepNodeForm = ({ data, onUpdate }) => {
-  return /* @__PURE__ */ React3.createElement("div", { className: "node-form" }, /* @__PURE__ */ React3.createElement(
+  return /* @__PURE__ */ React5.createElement("div", { className: "node-form" }, /* @__PURE__ */ React5.createElement(
     FormField,
     {
       label: "Step Name",
       value: data.label,
       onChange: (value) => onUpdate({ ...data, label: value })
     }
-  ), /* @__PURE__ */ React3.createElement(
+  ), /* @__PURE__ */ React5.createElement(
     FormField,
     {
       label: "Operation",
@@ -33140,20 +33268,19 @@ var StepNodeForm = ({ data, onUpdate }) => {
 
 // src/components/NodeDetails.jsx
 function NodeDetails({ selectedNode, onUpdate, onClose }) {
-  console.log("Selected Node:", selectedNode);
   const getFormComponent = (node) => {
     switch (node?.type) {
       case "source":
-        return /* @__PURE__ */ React4.createElement(SourceNodeForm, { data: node, onUpdate });
+        return /* @__PURE__ */ React6.createElement(SourceNodeForm, { data: node, onUpdate });
       case "step":
-        return /* @__PURE__ */ React4.createElement(StepNodeForm, { data: node, onUpdate });
+        return /* @__PURE__ */ React6.createElement(StepNodeForm, { data: node, onUpdate });
       case "output":
-        return /* @__PURE__ */ React4.createElement("h3", null, "Output Form (Coming Soon)");
+        return /* @__PURE__ */ React6.createElement("h3", null, "Output Form (Coming Soon)");
       default:
-        return /* @__PURE__ */ React4.createElement("h3", null, "Select a node type");
+        return /* @__PURE__ */ React6.createElement("h3", null, "Select a node type");
     }
   };
-  return /* @__PURE__ */ React4.createElement("div", { style: {
+  return /* @__PURE__ */ React6.createElement("div", { style: {
     background: "#2a2a2a",
     padding: "20px",
     borderRadius: "4px",
@@ -33162,25 +33289,26 @@ function NodeDetails({ selectedNode, onUpdate, onClose }) {
 }
 
 // src/Config.jsx
-var CustomNode = ({ data, style: style2 }) => {
-  const [isExpanded, setIsExpanded] = (0, import_react4.useState)(false);
-  return /* @__PURE__ */ React5.createElement("div", { style: {
+var CustomNode = React7.memo(({ data, style: style2 }) => {
+  const [isExpanded, setIsExpanded] = (0, import_react5.useState)(false);
+  console.log("CustomNode rendering with data:", data);
+  return /* @__PURE__ */ React7.createElement("div", { style: {
     ...style2,
     padding: "10px",
     width: isExpanded ? "300px" : "150px",
     transition: "all 0.3s ease"
-  } }, /* @__PURE__ */ React5.createElement(
+  } }, /* @__PURE__ */ React7.createElement(
     Handle,
     {
       type: "target",
       position: "left",
       style: { background: "#555" }
     }
-  ), /* @__PURE__ */ React5.createElement("div", { style: {
+  ), /* @__PURE__ */ React7.createElement("div", { style: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center"
-  } }, /* @__PURE__ */ React5.createElement("div", null, data.label), /* @__PURE__ */ React5.createElement("div", { style: { display: "flex", gap: "4px" } }, /* @__PURE__ */ React5.createElement(
+  } }, /* @__PURE__ */ React7.createElement("div", null, data.label), /* @__PURE__ */ React7.createElement("div", { style: { display: "flex", gap: "4px" } }, /* @__PURE__ */ React7.createElement(
     "button",
     {
       onClick: () => data.onEdit(data),
@@ -33194,7 +33322,7 @@ var CustomNode = ({ data, style: style2 }) => {
       }
     },
     "\u270E"
-  ), /* @__PURE__ */ React5.createElement(
+  ), /* @__PURE__ */ React7.createElement(
     "button",
     {
       onClick: () => setIsExpanded(!isExpanded),
@@ -33208,12 +33336,12 @@ var CustomNode = ({ data, style: style2 }) => {
       }
     },
     isExpanded ? "\u2212" : "+"
-  ))), isExpanded && /* @__PURE__ */ React5.createElement("div", { style: {
+  ))), isExpanded && /* @__PURE__ */ React7.createElement("div", { style: {
     marginTop: "10px",
     padding: "8px",
     background: "rgba(255, 255, 255, 0.1)",
     borderRadius: "3px"
-  } }, data.type === "source" && /* @__PURE__ */ React5.createElement(React5.Fragment, null, /* @__PURE__ */ React5.createElement("div", null, "Catalog: ", data.catalog || "N/A"), /* @__PURE__ */ React5.createElement("div", null, "Schema: ", data.schema || "N/A"), /* @__PURE__ */ React5.createElement("div", null, "Volume: ", data.volume_name || "N/A"), /* @__PURE__ */ React5.createElement(
+  } }, data.type === "source" && /* @__PURE__ */ React7.createElement(React7.Fragment, null, /* @__PURE__ */ React7.createElement("div", null, "Catalog: ", data.catalog || "N/A"), /* @__PURE__ */ React7.createElement("div", null, "Schema: ", data.schema || "N/A"), /* @__PURE__ */ React7.createElement("div", null, "Volume: ", data.volume_name || "N/A"), /* @__PURE__ */ React7.createElement("div", null, "Table: ", data.table || "N/A"), /* @__PURE__ */ React7.createElement(
     "a",
     {
       href: data.workspace_link,
@@ -33227,7 +33355,7 @@ var CustomNode = ({ data, style: style2 }) => {
       }
     },
     "View in Workspace"
-  )), data.type === "step" && /* @__PURE__ */ React5.createElement(React5.Fragment, null, /* @__PURE__ */ React5.createElement("div", null, "Operation: ", data.operation || "N/A"), /* @__PURE__ */ React5.createElement("div", null, "Parameters: ", JSON.stringify(data.parameters) || "None")), data.type === "output" && /* @__PURE__ */ React5.createElement(React5.Fragment, null, /* @__PURE__ */ React5.createElement("div", null, "Output Type: ", data.outputType || "N/A"), /* @__PURE__ */ React5.createElement("div", null, "Destination: ", data.destination || "N/A"))), /* @__PURE__ */ React5.createElement(
+  )), data.type === "step" && /* @__PURE__ */ React7.createElement(React7.Fragment, null, /* @__PURE__ */ React7.createElement("div", null, "Operation: ", data.operation || "N/A"), /* @__PURE__ */ React7.createElement("div", null, "Parameters: ", JSON.stringify(data.parameters) || "None")), data.type === "output" && /* @__PURE__ */ React7.createElement(React7.Fragment, null, /* @__PURE__ */ React7.createElement("div", null, "Output Type: ", data.outputType || "N/A"), /* @__PURE__ */ React7.createElement("div", null, "Destination: ", data.destination || "N/A"))), /* @__PURE__ */ React7.createElement(
     Handle,
     {
       type: "source",
@@ -33235,7 +33363,9 @@ var CustomNode = ({ data, style: style2 }) => {
       style: { background: "#555" }
     }
   ));
-};
+}, (prevProps, nextProps) => {
+  return JSON.stringify(prevProps.data) === JSON.stringify(nextProps.data);
+});
 var layoutConfig = {
   "source": { x: 100, y: 50 },
   "step": { x: 600, y: 50 },
@@ -33295,18 +33425,18 @@ var getLayoutedElements = (nodes, edges) => {
   return { nodes: layoutedNodes, edges };
 };
 function ConfigWidgetWrapper() {
-  return /* @__PURE__ */ React5.createElement(ReactFlowProvider, null, /* @__PURE__ */ React5.createElement(ConfigWidget, null));
+  return /* @__PURE__ */ React7.createElement(ReactFlowProvider, null, /* @__PURE__ */ React7.createElement(ConfigWidget, null));
 }
 function ConfigWidget() {
   const [dataSources] = useModelState("data_sources");
   const [processingSteps] = useModelState("processing_steps");
   const [outputs] = useModelState("outputs");
   const [configEdges, setConfigEdges] = useModelState("edges");
-  const [nodes, setNodes] = (0, import_react4.useState)([]);
-  const [edges, setEdges] = (0, import_react4.useState)(configEdges);
-  const [selectedNode, setSelectedNode] = (0, import_react4.useState)(null);
+  const [nodes, setNodes] = (0, import_react5.useState)([]);
+  const [edges, setEdges] = (0, import_react5.useState)(configEdges);
+  const [selectedNode, setSelectedNode] = (0, import_react5.useState)(null);
   const GroupNode2 = ({ data }) => {
-    return /* @__PURE__ */ React5.createElement("div", { style: {
+    return /* @__PURE__ */ React7.createElement("div", { style: {
       padding: "20px",
       background: "rgba(0, 0, 0, 0.3)",
       border: "1px solid rgba(255, 255, 255, 0.1)",
@@ -33316,13 +33446,13 @@ function ConfigWidget() {
       display: "flex",
       flexDirection: "column",
       gap: "20px"
-    } }, /* @__PURE__ */ React5.createElement("div", { style: {
+    } }, /* @__PURE__ */ React7.createElement("div", { style: {
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
       borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
       paddingBottom: "8px"
-    } }, /* @__PURE__ */ React5.createElement("div", { style: { color: "white", fontSize: "16px" } }, data.label), /* @__PURE__ */ React5.createElement(
+    } }, /* @__PURE__ */ React7.createElement("div", { style: { color: "white", fontSize: "16px" } }, data.label), /* @__PURE__ */ React7.createElement(
       "button",
       {
         onClick: (e) => {
@@ -33343,7 +33473,7 @@ function ConfigWidget() {
       data.label.slice(0, -1)
     )));
   };
-  const nodeTypes = (0, import_react4.useMemo)(() => ({
+  const nodeTypes = (0, import_react5.useMemo)(() => ({
     groupNode: GroupNode2,
     customNode: CustomNode
   }), []);
@@ -33363,17 +33493,17 @@ function ConfigWidget() {
   const handleSaveNode = (nodeId, newData) => {
     console.log("Saving node:", nodeId, newData);
   };
-  (0, import_react4.useEffect)(() => {
+  (0, import_react5.useEffect)(() => {
     setEdges(configEdges);
   }, [configEdges]);
-  const onNodesChange = (0, import_react4.useCallback)(
+  const onNodesChange = (0, import_react5.useCallback)(
     (changes) => {
       console.log("Node changes:", changes);
       setNodes((nds) => applyNodeChanges(changes, nds));
     },
-    []
+    [setNodes]
   );
-  const onEdgesChange = (0, import_react4.useCallback)(
+  const onEdgesChange = (0, import_react5.useCallback)(
     (changes) => {
       console.log("Edge changes:", changes);
       const updatedEdges = applyEdgeChanges(changes, edges);
@@ -33382,7 +33512,7 @@ function ConfigWidget() {
     },
     [edges, setConfigEdges]
   );
-  const onConnect = (0, import_react4.useCallback)(
+  const onConnect = (0, import_react5.useCallback)(
     (params) => {
       console.log("Connection params:", params);
       const newEdge = {
@@ -33405,7 +33535,8 @@ function ConfigWidget() {
     },
     [setConfigEdges]
   );
-  (0, import_react4.useEffect)(() => {
+  (0, import_react5.useEffect)(() => {
+    console.log("Creating new nodes with updated data sources");
     const groupNodes = [
       {
         id: "sources-group",
@@ -33435,57 +33566,65 @@ function ConfigWidget() {
         }
       }
     ];
-    const initialNodes = [
-      ...groupNodes,
-      ...dataSources.map((source, index2) => ({
+    const sourceNodes = dataSources.map((source, index2) => {
+      const nodeData = {
+        label: source.label,
+        type: "source",
+        catalog: source.catalog,
+        schema: source.schema,
+        table: source.table,
+        volume_name: source.volume_name,
+        workspace_link: source.workspace_link,
+        onEdit: (nodeData2) => setSelectedNode(nodeData2)
+      };
+      return {
         id: source.id,
         type: "customNode",
         parentId: "sources-group",
         position: { x: 25, y: index2 * 100 + 50 },
-        data: {
-          label: source.label,
-          type: "source",
-          catalog: source.catalog,
-          schema: source.schema,
-          table: source.table,
-          workspace_link: source.workspace_link,
-          volume_name: source.volume_name,
-          onEdit: (nodeData) => setSelectedNode(nodeData)
-        },
+        data: nodeData,
         style: nodeStyles.source
-      })),
-      ...processingSteps.map((step, index2) => ({
-        id: step.id,
-        type: "customNode",
-        parentId: "steps-group",
-        position: { x: 25, y: index2 * 100 + 50 },
-        data: {
-          label: step.label,
-          type: "step",
-          operation: step.operation,
-          parameters: step.parameters,
-          onEdit: (nodeData) => setSelectedNode(nodeData)
-        },
-        style: nodeStyles.step
-      })),
-      ...outputs.map((output, index2) => ({
-        id: output.id,
-        type: "customNode",
-        parentId: "outputs-group",
-        position: { x: 25, y: index2 * 100 + 50 },
-        data: {
-          label: output.label,
-          type: "output",
-          outputType: output.outputType,
-          destination: output.destination,
-          onEdit: (nodeData) => setSelectedNode(nodeData)
-        },
-        style: nodeStyles.output
-      }))
+      };
+    });
+    const stepNodes = processingSteps.map((step, index2) => ({
+      id: step.id,
+      type: "customNode",
+      parentId: "steps-group",
+      position: { x: 25, y: index2 * 100 + 50 },
+      data: {
+        label: step.label,
+        type: "step",
+        operation: step.operation,
+        parameters: step.parameters,
+        onEdit: (nodeData) => setSelectedNode(nodeData)
+      },
+      style: nodeStyles.step
+    }));
+    const outputNodes = outputs.map((output, index2) => ({
+      id: output.id,
+      type: "customNode",
+      parentId: "outputs-group",
+      position: { x: 25, y: index2 * 100 + 50 },
+      data: {
+        label: output.label,
+        type: "output",
+        outputType: output.outputType,
+        destination: output.destination,
+        onEdit: (nodeData) => setSelectedNode(nodeData)
+      },
+      style: nodeStyles.output
+    }));
+    const newNodes = [
+      ...groupNodes,
+      ...sourceNodes,
+      ...stepNodes,
+      ...outputNodes
     ];
-    setNodes(initialNodes);
+    console.log("Setting completely new nodes:", newNodes);
+    setNodes([]);
+    setTimeout(() => setNodes(newNodes), 0);
   }, [dataSources, processingSteps, outputs]);
-  (0, import_react4.useEffect)(() => {
+  (0, import_react5.useEffect)(() => {
     if (nodes.length > 0) {
       const { nodes: layoutedNodes } = getLayoutedElements(nodes, edges);
       setNodes(layoutedNodes);
@@ -33499,7 +33638,7 @@ function ConfigWidget() {
       strokeWidth: 2
     }
   }));
-  const createNewDataSource = (0, import_react4.useCallback)(() => {
+  const createNewDataSource = (0, import_react5.useCallback)(() => {
     const newId2 = `source-${Date.now()}`;
     const newNode = {
       id: newId2,
@@ -33518,7 +33657,7 @@ function ConfigWidget() {
     };
     setNodes((nodes2) => [...nodes2, newNode]);
   }, [dataSources.length]);
-  const createNewProcessingStep = (0, import_react4.useCallback)(() => {
+  const createNewProcessingStep = (0, import_react5.useCallback)(() => {
     const newId2 = `step-${Date.now()}`;
     const newNode = {
       id: newId2,
@@ -33535,7 +33674,7 @@ function ConfigWidget() {
     };
     setNodes((nodes2) => [...nodes2, newNode]);
   }, [processingSteps.length]);
-  const createNewOutput = (0, import_react4.useCallback)(() => {
+  const createNewOutput = (0, import_react5.useCallback)(() => {
     const newId2 = `output-${Date.now()}`;
     const newNode = {
       id: newId2,
@@ -33552,20 +33691,23 @@ function ConfigWidget() {
     };
     setNodes((nodes2) => [...nodes2, newNode]);
   }, [outputs.length]);
-  return /* @__PURE__ */ React5.createElement("div", { style: { width: "100%", height: "600px" } }, /* @__PURE__ */ React5.createElement(ReactFlowProvider, null, /* @__PURE__ */ React5.createElement(
+  (0, import_react5.useEffect)(() => {
+    console.log("DataSources updated:", dataSources);
+  }, [dataSources]);
+  return /* @__PURE__ */ React7.createElement("div", { style: { width: "100%", height: "600px" } }, /* @__PURE__ */ React7.createElement(ReactFlowProvider, null, /* @__PURE__ */ React7.createElement(
     index,
     {
       nodes,
-      edges,
+      edges: flowEdges,
       onNodesChange,
       onEdgesChange,
       onConnect,
       nodeTypes,
       fitView: true
     },
-    /* @__PURE__ */ React5.createElement(Controls, null),
-    /* @__PURE__ */ React5.createElement(Background, null),
-    selectedNode && /* @__PURE__ */ React5.createElement(Panel, { position: "bottom-center" }, /* @__PURE__ */ React5.createElement(
+    /* @__PURE__ */ React7.createElement(Controls, null),
+    /* @__PURE__ */ React7.createElement(Background, null),
+    selectedNode && /* @__PURE__ */ React7.createElement(Panel, { position: "bottom-center" }, /* @__PURE__ */ React7.createElement(
       NodeDetails,
       {
         selectedNode,
@@ -33577,9 +33719,9 @@ function ConfigWidget() {
 }
 
 // src/app.jsx
-var RenderContext = React6.createContext(null);
+var RenderContext = React8.createContext(null);
 function useRenderContext() {
-  let ctx = React6.useContext(RenderContext);
+  let ctx = React8.useContext(RenderContext);
   if (!ctx) throw new Error("RenderContext not found");
   return ctx;
 }
@@ -33589,8 +33731,8 @@ function useModel() {
 }
 function useModelState(key) {
   let model = useModel();
-  let [value, setValue] = React6.useState(model.get(key));
-  React6.useEffect(() => {
+  let [value, setValue] = React8.useState(model.get(key));
+  React8.useEffect(() => {
     let callback = () => setValue(model.get(key));
     model.on(`change:${key}`, callback);
     return () => model.off(`change:${key}`, callback);
@@ -33607,7 +33749,7 @@ function createRender(Widget) {
   return ({ el, model, experimental }) => {
     let root2 = ReactDOM.createRoot(el);
     root2.render(
-      /* @__PURE__ */ React6.createElement(React6.StrictMode, null, /* @__PURE__ */ React6.createElement(RenderContext.Provider, { value: { model, experimental } }, /* @__PURE__ */ React6.createElement(Widget, null)))
+      /* @__PURE__ */ React8.createElement(React8.StrictMode, null, /* @__PURE__ */ React8.createElement(RenderContext.Provider, { value: { model, experimental } }, /* @__PURE__ */ React8.createElement(Widget, null)))
     );
     return () => root2.unmount();
   };

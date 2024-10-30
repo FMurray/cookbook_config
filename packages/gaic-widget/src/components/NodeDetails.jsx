@@ -3,7 +3,6 @@ import { SourceNodeForm } from './forms/SourceNodeForm';
 import { StepNodeForm } from './forms/StepNodeForm';
 
 export function NodeDetails({ selectedNode, onUpdate, onClose }) {
-  console.log('Selected Node:', selectedNode);
 
   const getFormComponent = (node) => {
     switch (node?.type) {

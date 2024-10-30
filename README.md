@@ -62,6 +62,12 @@ genai_pipeline_project/
 ├── scripts/
 │   ├── run_pipeline.py
 │   └── utils.py
+├── packages/
+│   ├── gaic-widget/
+│   │   ├── src/
+│   │   │   ├── components/
+│   │   ├── package.json
+│   │   ├── pyproject.toml
 ├── src/
 │   ├── __init__.py
 │   ├── pipeline/
@@ -157,19 +163,19 @@ genai_pipeline_project/
    ```
 
 2. **Set Up Virtual Environment**:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install --upgrade pip
-   ```
+  This project uses [uv](https://docs.astral.sh/uv/) to manage Python versions.
+  After installing uv, run `uv install` to create a virtual environment and install the dependencies.
 
-3. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+  The project is a uv workspace, so you can use `uv sync`
 
 4. **Configure the Pipeline**:
-   - Edit `config/pipeline_config.yaml` to define your data sources, processing steps, and outputs.
+   - Edit `src/ai_cookbook/pipeline_config.yaml` to define your data sources, processing steps, and outputs.
+   - To use the yaml config you can use the following code:
+    ```python
+    from ai_cookbook.pipeline.pipeline import Pipeline
+    pipeline = Pipeline.from_yaml('config/pipeline_config.yaml')
+    ```
+    - You can also create a Pipline using purely python code, see `tests/test_pipeline.py` for an example.
 
 5. **Implement Processing Functions**:
    - Add custom processing logic in `src/functions/` or use existing functions.
@@ -204,23 +210,6 @@ genai_pipeline_project/
 - Should read from input tables and write to output tables.
 - Follow a consistent interface for compatibility with the pipeline.
 
-### **Utilities (`utils/`)**
-
-- **Spark Utilities**:
-  - Initialize and manage Spark sessions.
-  - Configure Spark settings for optimal performance.
-
-- **Delta Lake Utilities**:
-  - Read from and write to Delta Lake tables.
-  - Retrieve table versions and schemas.
-
-- **MLflow Utilities**:
-  - Log configurations, parameters, and artifacts.
-  - Facilitate experiment tracking and comparison.
-
-- **Permissions Utilities**:
-  - Validate user permissions for data operations.
-  - Ensure compliance with naming conventions.
 
 ## Best Practices
 
@@ -232,8 +221,10 @@ genai_pipeline_project/
   - Utilize the composability of the framework to build complex pipelines from simple parts.
 
 - **Validation and Error Handling**:
-  - Leverage automatic validation with Pydantic models.
-  - Implement comprehensive error handling and provide clear error messages.
+We have two types of validation:
+  - Pydantic models: These are used to validate the the static configuration, like the data passed in the config and the structure of the DAG.
+  - Just-in-time validation: For validations that require access to data or the runtime environment, prefer to 
+  validate using methods on the objects themselves.
 
 - **Logging and Monitoring**:
   - Use the provided logging configurations to monitor pipeline execution.
@@ -259,6 +250,23 @@ Contributions are welcome! Please follow these guidelines:
 - **Write Tests**: Ensure your code is covered by unit tests.
 
 - **Submit a Pull Request**: Provide a clear description of your changes and the problem they solve.
+
+### Building the UI
+
+The UI is built using [React](https://reactjs.org/) and [anywidget](https://anywidget.org/).
+
+To develop the UI:
+
+1. Run `uv sync` to install the dependencies.
+2. Install Node.js and npm using the instructions [here](https://nodejs.org/en/download/).
+3. Run `npm install` in the `packages/gaic-widget` directory to install the dependencies.
+4. Run `npm run build` to start the development server (or `npm run build:watch` to watch for changes).
+5. You can import the widget in a notebook using `
+```python
+from gaic_widget.widget import ConfigWidget
+widget = ConfigWidget(config_path='path/to/config.yaml')
+widget
+```
 
 ## License
 

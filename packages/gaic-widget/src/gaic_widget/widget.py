@@ -3,10 +3,15 @@ import anywidget
 import traitlets
 import yaml
 from typing import Dict, List, TypedDict
+import logging
 
 from pydantic_settings import BaseSettings
 from databricks.sdk import WorkspaceClient
 from ai_cookbook.pipeline.pipeline import Pipeline
+from ai_cookbook.logging.logger import log
+
+# Suppress watchfiles debug logs
+logging.getLogger("watchfiles").setLevel(logging.WARNING)
 
 
 class DatabricksSettings(BaseSettings):
@@ -45,6 +50,10 @@ class ConfigWidget(anywidget.AnyWidget):
         sync=True
     )
 
+    def _repr_mimebundle_(self, **kwargs):
+        """Ensure proper widget representation in notebooks"""
+        return super()._repr_mimebundle_(**kwargs)
+
     def __init__(self, config_path: str, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -64,13 +73,14 @@ class ConfigWidget(anywidget.AnyWidget):
         self.pipeline = Pipeline.from_yaml(config_path)
 
         self.populate_data(self.client)
-        self.observe(self.on_edges_change, names="edges")
-
-    def on_edges_change(self, change):
-        print(f"Edges changed: {change}")
+        self.on_msg(self._handle_schema_request)
+        self.on_msg(self._handle_volume_request)
+        self.on_msg(self._handle_save_source)
 
     def populate_data(self, client: WorkspaceClient):
         """Populate the widget with the pipeline configuration"""
+
+        log.debug("Populating data")
 
         for ds in self.pipeline.data_sources:
             ds.fetch_details(client)
@@ -154,18 +164,85 @@ class ConfigWidget(anywidget.AnyWidget):
         for component in [*self.data_sources, *self.processing_steps, *self.outputs]:
             # Look for catalog/schema/table in any field
             for key, value in component.items():
-                if isinstance(value, str):
-                    if "." in value:
-                        parts = value.split(".")
-                        if len(parts) == 3:
-                            catalogs.add(parts[0])
-                            schemas.add(parts[1])
-                            tables.add(parts[2])
-                        elif len(parts) == 2:
-                            schemas.add(parts[0])
-                            tables.add(parts[1])
+                if key == "catalog":
+                    catalogs.add(value)
+                elif key == "schema":
+                    schemas.add(value)
+                elif key == "table":
+                    tables.add(value)
 
         # Update the traits
         self.catalogs = sorted(list(catalogs))
         self.schemas = sorted(list(schemas))
         self.tables = sorted(list(tables))
+
+    def _handle_schema_request(self, _, content, buffers):
+        log.debug(f"Received custom message: {content}")
+        if content.get("type") == "catalog_selected":
+            catalog_name = content.get("catalog")
+            if catalog_name:
+                catalog_schemas = self.client.schemas.list(catalog_name)
+                schema_list = [schema.name for schema in catalog_schemas]
+                print(f"Fetched schemas for catalog {catalog_name}: {schema_list}")
+                self.send({"type": "schema_update", "schemas": schema_list})
+
+    def _handle_volume_request(self, _, content, buffers):
+        if content.get("type") == "volume_request":
+            catalog_name = content.get("catalog")
+            schema_name = content.get("schema")
+            if catalog_name and schema_name:
+                try:
+                    volumes = self.client.volumes.list(catalog_name, schema_name)
+                    volume_list = [volume.name for volume in volumes]
+                    log.debug(
+                        f"Fetched volumes for {catalog_name}.{schema_name}: {volume_list}"
+                    )
+                    self.send({"type": "volume_update", "volumes": volume_list})
+                except Exception as e:
+                    log.error(f"Error fetching volumes: {str(e)}")
+                    self.send({"type": "volume_update", "volumes": [], "error": str(e)})
+
+    def _handle_save_source(self, _, content, buffers):
+        if content.get("type") == "save_source_node":
+            source_data = content.get("data")
+            print(f"Saving source node data: {source_data}")
+
+            # Create a new list of data sources
+            updated_sources = self.data_sources[:]  # Create a copy
+
+            # Find and update the source
+            source_index = next(
+                (
+                    i
+                    for i, ds in enumerate(updated_sources)
+                    if ds["id"] == source_data["label"]
+                ),
+                None,
+            )
+
+            if source_index is not None:
+                # Create updated source with new values
+                updated_source = updated_sources[source_index].copy()
+                changes = {}
+
+                for key, new_value in source_data.items():
+                    if key in updated_source and updated_source[key] != new_value:
+                        changes[key] = {"old": updated_source[key], "new": new_value}
+                        updated_source[key] = new_value
+
+                # Replace the old source with the updated one
+                updated_sources[source_index] = updated_source
+
+                # Assign the new list to trigger sync
+                self.data_sources = updated_sources
+
+                log.debug(f"Source node changes: {changes}")
+
+                # Send confirmation back to UI
+                self.send(
+                    {
+                        "type": "save_confirmation",
+                        "status": "success",
+                        "message": "Source node saved successfully",
+                    }
+                )

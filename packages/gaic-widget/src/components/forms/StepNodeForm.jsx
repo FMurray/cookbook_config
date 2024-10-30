@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { FormField } from '../common/FormField';
+import { useModelState } from '../../app';
 
 export const StepNodeForm = ({ data, onUpdate }) => {
+
   return (
     <div className="node-form">
       <FormField

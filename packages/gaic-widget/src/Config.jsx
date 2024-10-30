@@ -7,8 +7,9 @@ import { useCallback, useState, useEffect, useMemo } from 'react';
 import { NodeDetails } from './components/NodeDetails';
 
 // Custom node component with handles
-const CustomNode = ({ data, style }) => {
+const CustomNode = React.memo(({ data, style }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  console.log('CustomNode rendering with data:', data); // Debug log
 
   return (
     <div style={{ 
@@ -71,6 +72,7 @@ const CustomNode = ({ data, style }) => {
               <div>Catalog: {data.catalog || 'N/A'}</div>
               <div>Schema: {data.schema || 'N/A'}</div>
               <div>Volume: {data.volume_name || 'N/A'}</div>
+              <div>Table: {data.table || 'N/A'}</div>
               <a 
                 href={data.workspace_link} 
                 target="_blank" 
@@ -108,7 +110,10 @@ const CustomNode = ({ data, style }) => {
       />
     </div>
   );
-};
+}, (prevProps, nextProps) => {
+  // Return false if we should re-render
+  return JSON.stringify(prevProps.data) === JSON.stringify(nextProps.data);
+});
 
 // Layout configuration
 const layoutConfig = {
@@ -197,6 +202,7 @@ function ConfigWidget() {
   const [edges, setEdges] = useState(configEdges);
   const [selectedNode, setSelectedNode] = useState(null);
 
+
   const GroupNode = ({ data }) => {
     return (
       <div style={{
@@ -280,7 +286,7 @@ function ConfigWidget() {
       console.log('Node changes:', changes);
       setNodes((nds) => applyNodeChanges(changes, nds));
     },
-    []
+    [setNodes]
   );
 
   const onEdgesChange = useCallback(
@@ -323,6 +329,7 @@ function ConfigWidget() {
 
   // Transform nodes with custom node type
   useEffect(() => {
+    console.log('Creating new nodes with updated data sources');
     const groupNodes = [
       {
         id: 'sources-group',
@@ -353,55 +360,73 @@ function ConfigWidget() {
       }
     ];
 
-    const initialNodes = [
-      ...groupNodes,
-      ...dataSources.map((source, index) => ({
+    // Create completely new node objects
+    const sourceNodes = dataSources.map((source, index) => {
+      const nodeData = {
+        label: source.label,
+        type: 'source',
+        catalog: source.catalog,
+        schema: source.schema,
+        table: source.table,
+        volume_name: source.volume_name,
+        workspace_link: source.workspace_link,
+        onEdit: (nodeData) => setSelectedNode(nodeData)
+      };
+
+      return {
         id: source.id,
         type: 'customNode',
         parentId: 'sources-group',
         position: { x: 25, y: (index * 100) + 50 },
-        data: { 
-          label: source.label,
-          type: 'source',
-          catalog: source.catalog,
-          schema: source.schema,
-          table: source.table,
-          workspace_link: source.workspace_link,
-          volume_name: source.volume_name,
-          onEdit: (nodeData) => setSelectedNode(nodeData)
-        },
+        data: nodeData,
         style: nodeStyles.source
-      })),
-      ...processingSteps.map((step, index) => ({
-        id: step.id,
-        type: 'customNode',
-        parentId: 'steps-group',
-        position: { x: 25, y: (index * 100) + 50 },
-        data: { 
-          label: step.label,
-          type: 'step',
-          operation: step.operation,
-          parameters: step.parameters,
-          onEdit: (nodeData) => setSelectedNode(nodeData)
-        },
-        style: nodeStyles.step
-      })),
-      ...outputs.map((output, index) => ({
-        id: output.id,
-        type: 'customNode',
-        parentId: 'outputs-group',
-        position: { x: 25, y: (index * 100) + 50 },
-        data: { 
-          label: output.label,
-          type: 'output',
-          outputType: output.outputType,
-          destination: output.destination,
-          onEdit: (nodeData) => setSelectedNode(nodeData)
-        },
-        style: nodeStyles.output
-      }))
+      };
+    });
+
+    const stepNodes = processingSteps.map((step, index) => ({
+      id: step.id,
+      type: 'customNode',
+      parentId: 'steps-group',
+      position: { x: 25, y: (index * 100) + 50 },
+      data: { 
+        label: step.label,
+        type: 'step',
+        operation: step.operation,
+        parameters: step.parameters,
+        onEdit: (nodeData) => setSelectedNode(nodeData)
+      },
+      style: nodeStyles.step
+    }));
+
+    const outputNodes = outputs.map((output, index) => ({
+      id: output.id,
+      type: 'customNode',
+      parentId: 'outputs-group',
+      position: { x: 25, y: (index * 100) + 50 },
+      data: { 
+        label: output.label,
+        type: 'output',
+        outputType: output.outputType,
+        destination: output.destination,
+        onEdit: (nodeData) => setSelectedNode(nodeData)
+      },
+      style: nodeStyles.output
+    }));
+
+    // Create a completely new array of nodes
+    const newNodes = [
+      ...groupNodes,
+      ...sourceNodes,
+      ...stepNodes,
+      ...outputNodes
     ];
-    setNodes(initialNodes);
+
+    console.log('Setting completely new nodes:', newNodes);
+    
+    // Force React Flow to update by setting nodes to empty first
+    setNodes([]);
+    setTimeout(() => setNodes(newNodes), 0);
+
   }, [dataSources, processingSteps, outputs]);
 
   // Apply layout when nodes or edges change
@@ -479,12 +504,17 @@ function ConfigWidget() {
     setNodes(nodes => [...nodes, newNode]);
   }, [outputs.length]);
 
+  // Add this effect to track dataSources changes
+  useEffect(() => {
+    console.log('DataSources updated:', dataSources);
+  }, [dataSources]);
+
   return (
     <div style={{ width: '100%', height: '600px' }}>
       <ReactFlowProvider>
         <ReactFlow
           nodes={nodes}
-          edges={edges}
+          edges={flowEdges}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
