@@ -1,7 +1,7 @@
 import importlib
 
 from pydantic import ValidationError, BaseModel, field_validator, Field
-from typing import List, Union, Optional
+from typing import List, Union, Optional, Callable
 
 from ai_cookbook.logging.logger import log
 from ai_cookbook.pipeline.data_source import DataSource
@@ -9,13 +9,18 @@ from ai_cookbook.pipeline.data_source import DataSource
 
 class ProcessingStep(BaseModel):
     name: str
-    function: str  # This will be a module path like "ai_cookbook.functions.parsing.parse_pdf"
+    function: Union[
+        str, Callable
+    ]  # This will be a module path like "ai_cookbook.functions.parsing.parse_pdf"
     inputs: List[Union["ProcessingStep", DataSource]]
     output_table: str
     parameters: Optional[dict] = Field(default_factory=dict)
 
     @field_validator("function")
     def validate_function_exists(cls, v):
+        if isinstance(v, Callable):
+            return v
+
         try:
             # Split the function path into module path and function name
             module_path, function_name = v.rsplit(".", 1)

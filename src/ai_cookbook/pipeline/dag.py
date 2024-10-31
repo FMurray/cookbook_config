@@ -1,9 +1,29 @@
+from typing import Any, Optional, Callable
+
+
+class Edge:
+    def __init__(
+        self,
+        source: Any,
+        destination: Any,
+        function: Optional[Callable] = None,
+        parameters: Optional[dict] = None,
+    ):
+        self.source = source
+        self.destination = destination
+        self.function = function
+        self.parameters = parameters or {}
+
+    def __repr__(self):
+        return f"Edge(source={self.source.name}, destination={self.destination.name})"
+
+
 def detect_cycles(nodes, edges):
     from collections import defaultdict
 
     graph = defaultdict(list)
-    for src, dst in edges:
-        graph[src].append(dst)
+    for edge in edges:
+        graph[edge.source.name].append(edge.destination.name)
 
     visited = set()
     rec_stack = set()
@@ -29,9 +49,9 @@ def topological_sort(nodes, edges):
     graph = defaultdict(list)
     in_degree = {node: 0 for node in nodes}
 
-    for src, dst in edges:
-        graph[src].append(dst)
-        in_degree[dst] += 1
+    for edge in edges:
+        graph[edge.source.name].append(edge.destination.name)
+        in_degree[edge.destination.name] += 1
 
     queue = deque([node for node in nodes if in_degree[node] == 0])
     sorted_list = []

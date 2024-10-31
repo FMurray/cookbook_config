@@ -8,12 +8,12 @@ import yaml
 
 def main(config_path):
     # Load configuration
-    with open(config_path, "r") as f:
-        config_data = yaml.safe_load(f)
+    # with open(config_path, "r") as f:
+    #     config_data = yaml.safe_load(f)
 
     # Initialize the pipeline
     try:
-        pipeline = Pipeline(config_data)
+        pipeline = Pipeline.from_yaml(config_path)
     except Exception as e:
         log.exception("💔 Pipeline initialization failed:")
         return  # Exit or raise an exception
