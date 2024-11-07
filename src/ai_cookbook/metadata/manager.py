@@ -29,21 +29,27 @@ class MetadataManager:
 
     def __init__(self):
         self.step_metadata = {}
-        self.runs = {}
 
-    def update_step_metadata(self, step, run_id, status):
+    def update_step_metadata(self, step, run: Run, status: str):
         """
         Adds a new entry to the step metadata dictionary
         """
-        if step.name not in self.step_metadata:
-            self.step_metadata[step.name] = []
-        self.step_metadata[step.name].append((run_id, status))
+        if run.run_id not in self.step_metadata:
+            self.step_metadata[run.run_id] = {}
+        if step.name not in self.step_metadata[run.run_id]:
+            self.step_metadata[run.run_id][step.name] = []
+        self.step_metadata[run.run_id][step.name].append(status)
 
     def write_step_result(self, result):
         pass
 
-    def get_metadata(self):
-        return self.step_metadata
+    def get_metadata(self, run: Run):
+        """
+        Get metadata for a specific run. Initialize empty dict if run doesn't exist.
+        """
+        if run.run_id not in self.step_metadata:
+            self.step_metadata[run.run_id] = {}
+        return self.step_metadata[run.run_id]
 
     def start_run(self):
         """

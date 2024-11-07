@@ -227,10 +227,13 @@ class Pipeline(BaseModel):
                 return step
         raise ValueError(f"Step {step_name} not found in pipeline")
 
-    def run(self):
-        run_id = self.metadata_manager.start_run()
+    def run(self) -> Run:
+        """
+        Run the pipeline and return the run id
+        """
+        run = self.metadata_manager.start_run()
         log.info("🏃 Starting run")
-        console.log(run_id)
+        console.log(run)
 
         with Progress(
             SpinnerColumn(),
@@ -258,25 +261,33 @@ class Pipeline(BaseModel):
                         total=100,
                         refresh=True,
                     )
-                    self._execute_edge(edge, run_id)
+                    self._execute_edge(edge, run)
 
-                    for i in range(3):
-                        progress.update(edge_task, completed=i * 100 / 3)
-                        time.sleep(2)
+                    progress.update(edge_task, completed=100)
 
                     # Remove the completed edge task
                     progress.remove_task(edge_task)
 
                 progress.update(pipeline_task, advance=1)
 
+        return run
+
     def _execute_edge(self, edge: Edge, run: Run):
         """Execute a single edge with progress tracking"""
+        log.info(
+            f"Starting edge execution: {edge.source.name} → {edge.destination.name}"
+        )
         self.metadata_manager.update_step_metadata(edge.destination, run, "running")
         try:
+            log.info(f"Executing edge function: {edge.function}")
             result = edge.function()
+            log.info(f"Edge function completed: {result}")
         except Exception as e:
+            log.error(f"Edge failed: {str(e)}")
             self.metadata_manager.update_step_metadata(edge.destination, run, "failed")
+            log.info(f"Updated metadata for failed edge: {edge.destination.name}")
             raise
+        self.metadata_manager.update_step_metadata(edge.destination, run, "completed")
         self.metadata_manager.write_step_result(result)
 
     def execute_step(self, step: ProcessingStep, run_id: str):

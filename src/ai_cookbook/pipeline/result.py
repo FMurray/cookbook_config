@@ -14,6 +14,10 @@ class Result(BaseModel, Generic[T, E]):
     success_rows: int
     error_rows: int
 
+    def __init__(self, data: Optional[T] = None, error: Optional[E] = None):
+        self.data = data
+        self.error = error
+
     def is_ok(self) -> bool:
         """Check if the result is successful."""
         return self.error is None

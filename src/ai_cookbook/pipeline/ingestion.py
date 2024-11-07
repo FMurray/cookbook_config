@@ -25,17 +25,19 @@ def ingest_volume(source: DataSource, destination: ProcessingStep):
     try:
         records_processed = 100
 
+        destination.function()
+
         return True
 
         # TODO: this is funky, I'll fix it later
 
-        # return IngestionResult(
-        #     data=IngestionData(processed_records=records_processed),
-        #     source_volume=source.volume_name,
-        #     destination_table=destination.output_table,
-        #     success_rows=records_processed,
-        #     error_rows=0,
-        # )
+        return IngestionResult(
+            data=IngestionData(processed_records=records_processed),
+            source_volume=source.volume_name,
+            destination_table=destination.output_table,
+            success_rows=records_processed,
+            error_rows=0,
+        )
     except Exception as e:
         error_rows = 1
 

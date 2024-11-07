@@ -27,6 +27,7 @@ dependencies = [
     { name = "pydantic-settings" },
     { name = "pytest" },
     { name = "pyyaml" },
+    { name = "returns" },
     { name = "rich" },
     { name = "typing-extensions" },
 ]
@@ -45,6 +46,7 @@ requires-dist = [
     { name = "pydantic-settings", specifier = ">=2.6.0" },
     { name = "pytest", specifier = ">=8.3.3" },
     { name = "pyyaml", specifier = ">=6.0.2" },
+    { name = "returns", specifier = ">=0.23.0" },
     { name = "rich", specifier = ">=13.9.3" },
     { name = "typing-extensions", specifier = ">=4.12.2" },
 ]
@@ -1682,6 +1684,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/63/70/2bf7780ad2d390a8d301ad0b550f1581eadbd9a20f896afe06353c2a2913/requests-2.32.3.tar.gz", hash = "sha256:55365417734eb18255590a9ff9eb97e9e1da868d4ccd6402399eaf68af20a760", size = 131218 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f9/9b/335f9764261e915ed497fcdeb11df5dfd6f7bf257d4a6a2a686d80da4d54/requests-2.32.3-py3-none-any.whl", hash = "sha256:70761cfe03c773ceb22aa2f671b4757976145175cdfca038c02654d061d6dcc6", size = 64928 },
+]
+
+[[package]]
+name = "returns"
+version = "0.23.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/52/b4/411f1e4026344f0ccabc5654aee02280ebe8a9783756e53c76437693dc9a/returns-0.23.0.tar.gz", hash = "sha256:27594c28e5fc338e052d27ddf77fe1da82db4472f6d59901e7e9165be35a5256", size = 242563 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9c/cc/ff7046c009c17136f83764f8ff225309b58d364c2ffd5626b5a338bd865a/returns-0.23.0-py3-none-any.whl", hash = "sha256:278aa6168072b24574ad14be32f7123d1b835928473dd40bc506f47c8b25859a", size = 155284 },
 ]
 
 [[package]]
